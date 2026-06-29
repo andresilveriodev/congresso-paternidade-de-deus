@@ -1,0 +1,16 @@
+node_modules/
+.next/
+out/
+dist/
+
+.env
+.env*.local
+
+*.log
+coverage/
+.netlify/
+
+Paternidade de Deus.fig
+design-system.html
+netlify-deploy/
+output/
