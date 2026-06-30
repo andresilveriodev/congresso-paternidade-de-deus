@@ -32,53 +32,64 @@ export const schedule = [
   {
     day: "DIA 09/11 — Segunda-feira",
     items: [
-      ["14h00", "Credenciamento — Cine Teatro Pe. Jesus Flores"],
-      ["20h00", "Apresentações culturais na praça do Santuário"]
+      ["14h", "Credenciamento — Cineteatro Pe. Jesus Flores"],
+      ["20h", "Apresentações culturais na praça do Santuário"]
     ]
   },
   {
     day: "DIA 10/11 — Terça-feira",
     items: [
-      ["08h30", "Cerimonial de abertura"],
-      ["09h30", "Conferência de abertura — O Pai revelado por Jesus Cristo: fundamentos cristológicos — Cardeal José Tolentino de Mendonça"],
-      ["14h30", "Mesa-redonda: A revelação do Pai no Antigo Testamento"],
-      ["15h15", "A teologia patrística da Paternidade divina — Cardeal Berhane-Yesus Souraphiel"],
-      ["16h00", "Debate"],
+      ["8h30", "Cerimonial de abertura"],
+      ["9h30", "Conferência de abertura — O Pai revelado por Jesus Cristo: fundamentos cristológicos — Cardeal José Tolentino de Mendonça"],
+      ["14h30", "Mesa-redonda: A revelação do Pai no Antigo Testamento — Pe. João Paulo Santos, CSsR"],
+      ["15h15", "A teologia patrística da Paternidade divina — Cardeal Berhaneyesus Souraphiel"],
+      ["16h", "Debate"],
+      ["17h", "Lanche"],
       ["17h15", "Comunicações científicas"],
-      ["19h00", "Missa no Santuário Basílica — presidida pelo Cardeal Tolentino de Mendonça"],
-      ["20h00", "Apresentação cultural na praça do Santuário"]
+      ["19h", "Missa no Santuário Basílica — presidida pelo Cardeal José Tolentino de Mendonça"],
+      ["20h", "Apresentação cultural na praça do Santuário"]
     ]
   },
   {
     day: "DIA 11/11 — Quarta-feira",
     items: [
-      ["08h30", "Oração"],
-      ["09h00", "Conferência — A Paternidade no mistério trinitário — Prof.ª Maria Clara Lucchetti Bingemer"],
-      ["11h00", "Debate"],
-      ["14h30", "Mesa-redonda: São Tomás de Aquino; Magistério do Papa Francisco"],
+      ["8h30", "Oração"],
+      ["9h", "Conferência — A Paternidade no mistério trinitário: geração eterna e comunhão — Prof.ª Maria Clara Lucchetti Bingemer"],
+      ["10h30", "Lanche"],
+      ["11h", "Debate"],
+      ["14h30", "São Tomás de Aquino: a paternidade na Suma Teológica — Pe. Elílio de Faria Matos Júnior"],
+      ["15h15", "A Paternidade de Deus no Magistério do Papa Francisco — Dom Ricardo Hoepers"],
+      ["16h", "Debate"],
+      ["17h", "Lanche"],
       ["17h15", "Comunicações científicas"],
-      ["19h00", "Missa no Santuário Matriz — Cardeal Óscar Rodriguez Maradiaga"],
-      ["20h00", "Apresentação cultural na praça do Santuário"]
+      ["19h", "Missa no Santuário Matriz — Cardeal Óscar Rodriguez Maradiaga"],
+      ["20h", "Apresentação cultural na praça do Santuário"]
     ]
   },
   {
     day: "DIA 12/11 — Quinta-feira",
     items: [
-      ["08h30", "Oração"],
-      ["09h00", "Conferência — O Pai na liturgia eucarística e na oração da Igreja — Cardeal Óscar Rodriguez Maradiaga"],
-      ["14h30", "Mesa-redonda: Piedade popular e inculturação da fé; Santuário como locus theologicus"],
+      ["8h30", "Oração"],
+      ["9h", "Conferência — O Pai na liturgia eucarística e na oração da Igreja — Cardeal Óscar Rodriguez Maradiaga"],
+      ["10h30", "Lanche"],
+      ["11h", "Debate"],
+      ["14h30", "Piedade popular e inculturação da fé — Dr. Bryan Thatcher"],
+      ["15h15", "O Santuário do Divino Pai Eterno como locus theologicus — Dom João Justino de Medeiros Silva"],
+      ["16h", "Debate"],
+      ["17h", "Lanche"],
       ["17h15", "Comunicações científicas"],
-      ["19h00", "Missa no Santuário Basílica"],
-      ["20h00", "Apresentação cultural na praça do Santuário"]
+      ["19h", "Missa no Santuário Basílica — presidida pelo Dom Danival Milagres Coelho"],
+      ["20h", "Apresentação cultural na praça do Santuário"]
     ]
   },
   {
     day: "DIA 13/11 — Sexta-feira",
     items: [
-      ["06h55", "Missa no Santuário Basílica — Dom João Justino de Medeiros Silva"],
-      ["09h00", "Conferência — A iconografia do Pai na tradição cristã — Frei Sidney Damasio Machado"],
-      ["11h00", "Carta de Trindade sobre a Paternidade de Deus"],
-      ["12h00", "Encerramento"],
+      ["6h55", "Missa no Santuário Basílica — Dom João Justino de Medeiros Silva"],
+      ["9h", "Conferência — A iconografia do Pai na tradição cristã — Frei Sidney Damasio Machado"],
+      ["10h30", "Lanche"],
+      ["11h", "Carta de Trindade sobre a Paternidade de Deus"],
+      ["12h", "Encerramento"],
       ["14h30", "Visita guiada ao Santuário e canteiro de obras"]
     ]
   }
@@ -163,6 +174,13 @@ export const speakers = [
       "Arcebispo de Goiânia e Primeiro Vice-presidente da CNBB. Ingressou no Seminário Arquidiocesano Santo Antônio, em Juiz de Fora, onde cursou Filosofia e Teologia."
   },
   {
+    name: "Dom Ricardo Hoepers",
+    role: "secretário-geral da CNBB e Bispo Auxiliar",
+    image: "/speakers/dom-ricardo-hoepers.jpg",
+    bio:
+      "Ordenado presbítero em 1999, após ter cursado Filosofia na Universidade Federal do Paraná e Teologia no Studium Theologicum, da Faculdade Claretiana de Teologia. Especialização e mestrado em Bioética, pela Faculdade São Camilo, de São Paulo (1999), e pela Academia Alfonsiana, de Roma (2011). Além de mestrado em Educação pela Pontifícia Universidade Católica do Paraná e doutorado em Teologia Moral pela Academia Alfonsiana. Atual secretário-geral da CNBB e Bispo Auxiliar da Arquidiocese de Brasília."
+  },
+  {
     name: "Frei Sidney Damasio Machado",
     role: "Curitiba",
     image: asset("742e74be3dc907bbb03dae076ba949dc1e1ff66e.png"),
@@ -170,7 +188,7 @@ export const speakers = [
       "Frade menor capuchinho, doutor em Teologia pela Pontifícia Universidade Gregoriana de Roma, diplomado em Bens Culturais da Igreja e professor de Teologia."
   },
   {
-    name: "Cardeal Berhane-Yesus Demerew Souraphiel",
+    name: "Cardeal Berhaneyesus Demerew Souraphiel",
     role: "Etiópia",
     image: asset("008294b94eb3b748eda037d79e86d92c61a06129.png"),
     bio:
@@ -201,12 +219,12 @@ export const speakers = [
 
 export const recommendations = {
   "Hotéis": [
-    { name: "Hotel 01", image: images.aerialFront, text: "Sugestão de hospedagem próxima ao Santuário." },
-    { name: "Hotel 02", image: images.sanctuary, text: "Opção para participantes que desejam fácil deslocamento." }
+    { name: "Hotel 01", image: "/hotel_01.jpg", text: "Sugestão de hospedagem próxima ao Santuário." },
+    { name: "Hotel 02", image: "/hotel_02.jpg", text: "Opção para participantes que desejam fácil deslocamento." }
   ],
   "Restaurantes": [
-    { name: "Restaurante 01", image: images.presentation, text: "Restaurante para refeições em grupo durante o evento." },
-    { name: "Restaurante 02", image: images.theology, text: "Opção para almoço e jantar nas proximidades." }
+    { name: "Restaurante 01", image: "/Restaurante_01.jpg", text: "Restaurante para refeições em grupo durante o evento." },
+    { name: "Restaurante 02", image: "/Restaurante_02.jpg", text: "Opção para almoço e jantar nas proximidades." }
   ]
 };
 

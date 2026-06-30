@@ -611,11 +611,17 @@ img {
 
 :is(.mystery-section, .formation-section) .tab-list {
   align-self: start;
-  border-top: 1px solid rgba(2, 30, 48, 0.38);
+  border-top: 1px solid rgba(24, 48, 2, 0.38);
   display: grid;
   grid-column: 1;
   grid-row: 2;
-  margin: 120px 0 0;
+  margin: 220px 0 0;
+}
+
+@media (min-width: 901px) {
+  .formation-section .tab-list {
+    margin-top: 250px;
+  }
 }
 
 :is(.mystery-section, .formation-section) .tab-list button {
@@ -873,8 +879,7 @@ img {
 }
 
 .recommendation-option-icon,
-.recommendation-actions button:first-child .arrow-icon,
-.recommendation-actions button:last-child {
+.recommendation-actions button:first-child .arrow-icon {
   align-items: center;
   background: var(--navy);
   color: var(--white);
@@ -955,13 +960,6 @@ img {
 .recommendation-actions span {
   font-size: 10px;
   font-weight: 700;
-}
-
-.recommendation-actions button:last-child {
-  border: 0;
-  font-size: 8px;
-  font-weight: 800;
-  padding: 0;
 }
 
 .logo-grid {

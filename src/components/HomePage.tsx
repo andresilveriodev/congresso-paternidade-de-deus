@@ -34,6 +34,24 @@ function TextLines({ text }: { text: string }) {
   );
 }
 
+function ScheduleText({ text }: { text: string }) {
+  const phrase = "locus theologicus";
+
+  if (!text.includes(phrase)) {
+    return <>{text}</>;
+  }
+
+  const [before, after] = text.split(phrase);
+
+  return (
+    <>
+      {before}
+      <em>{phrase}</em>
+      {after}
+    </>
+  );
+}
+
 function SplitTitle({ first, second }: { first: string; second?: string }) {
   return (
     <h2>
@@ -144,7 +162,9 @@ export function HomePage() {
             {schedule[scheduleDay].items.map(([time, text]) => (
               <div className="schedule-row" key={`${schedule[scheduleDay].day}-${time}-${text}`}>
                 <time>{time}</time>
-                <p>{text}</p>
+                <p>
+                  <ScheduleText text={text} />
+                </p>
               </div>
             ))}
           </article>
@@ -360,13 +380,6 @@ export function HomePage() {
                   >
                     <ArrowIcon />
                     <span>Mais informação</span>
-                  </button>
-                  <button
-                    aria-label="Whatsapp"
-                    onClick={() => setDrawer({ title: recommendation.name, image: recommendation.image, text: recommendation.text })}
-                    type="button"
-                  >
-                    <span>Whatsapp</span>
                   </button>
                 </div>
               </div>
