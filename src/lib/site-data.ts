@@ -20,11 +20,13 @@ export const images = {
 };
 
 export const logos = [
+  "/santuario%20pai%20eterno.png",
+  "/CONGREGACAO_REDENTORISTA.png",
+  "/logo_abba.jpeg",
   asset("2a3b1367a9f59890738d1e5f690a7bed23f7906a.png"),
   asset("b01380e8c541931ed548baee09abdf1d27306ee8.png"),
   asset("76648d1d44417895acac40911e04cded7969151b.png"),
   asset("2cfe5dce2ec93ecc8729cea5cfdc9d4ac95f3e99.png"),
-  asset("51f433c7a037e6cc1c4663e442e5dbc16d919246.png"),
   asset("08047773b1e8c778ef7cc4e499449e0d2d7c27a3.png")
 ];
 

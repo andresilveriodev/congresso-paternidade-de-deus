@@ -16,7 +16,7 @@ export const locales: Record<Locale, {
     nav: ["Programação", "Mistério", "Formação", "Conferencistas", "Local", "Regulamento"],
     labels: {
       language: "Idioma",
-      more: "Mais informação",
+      more: "Mais informações",
       registration: "Inscrição",
       schedule: "Programação",
       mystery: "Apresentação",

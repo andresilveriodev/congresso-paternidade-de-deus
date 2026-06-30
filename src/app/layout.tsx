@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Paternidade de Deus",
   description: "I Congresso Internacional de Teologia sobre a Paternidade de Deus",
   icons: {
-    icon: "/figma-assets/3541becb5ea49349781bc802c00b5adbd28d4f70.png"
+    icon: "/favicom.png"
   }
 };
 
