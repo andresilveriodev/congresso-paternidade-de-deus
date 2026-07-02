@@ -4,6 +4,7 @@ export const images = {
   hero: "/figma-live/hero-bg.png",
   markDark: "/figma-live/header-logo.png",
   markMenu: "/figma-live/header-logo-compacta.png",
+  markMenuMobile: asset("3bde4d08890c0e7984f9709d5ba8c05e6898072d.png"),
   markRegistration: asset("f99952d65570f9808efda718581e212e15dbed9a.png"),
   markGold: "/figma-live/hero-logo.png",
   heroBrush: "/figma-live/gold-brush.png",
@@ -195,11 +196,11 @@ export const speakers = [
       "Ordenado presbítero em 1999, após ter cursado Filosofia na Universidade Federal do Paraná e Teologia no Studium Theologicum, da Faculdade Claretiana de Teologia. Especialização e mestrado em Bioética, pela Faculdade São Camilo, de São Paulo (1999), e pela Academia Alfonsiana, de Roma (2011). Além de mestrado em Educação pela Pontifícia Universidade Católica do Paraná e doutorado em Teologia Moral pela Academia Alfonsiana. Atual secretário-geral da CNBB e Bispo Auxiliar da Arquidiocese de Brasília."
   },
   {
-    name: "Frei Sidney Damasio Machado",
-    role: "Curitiba",
-    image: asset("742e74be3dc907bbb03dae076ba949dc1e1ff66e.png"),
+    name: "Pe. João Paulo dos Santos, CSsR",
+    role: "Missionários Redentoristas",
+    image: asset("b57fbb187434127b3f83762a27d533eab67345e4.png"),
     bio:
-      "Frade menor capuchinho, doutor em Teologia pela Pontifícia Universidade Gregoriana de Roma, diplomado em Bens Culturais da Igreja e professor de Teologia."
+      "Mestre em Exegese Bíblica pelo Pontifício Instituto Bíblico de Roma. Superior Provincial dos Missionários Redentoristas, Província de Goiás."
   },
   {
     name: "Cardeal Berhaneyesus Demerew Souraphiel",
@@ -223,11 +224,11 @@ export const speakers = [
       "Padre da Arquidiocese de Juiz de Fora, com formação em Teologia, Filosofia e Teologia Moral, e doutorando em Filosofia pela Pontifícia Università Lateranense."
   },
   {
-    name: "Pe. João Paulo dos Santos, CSsR",
-    role: "Missionários Redentoristas",
-    image: asset("b57fbb187434127b3f83762a27d533eab67345e4.png"),
+    name: "Frei Sidney Damasio Machado",
+    role: "Curitiba",
+    image: asset("742e74be3dc907bbb03dae076ba949dc1e1ff66e.png"),
     bio:
-      "Mestre em Exegese Bíblica pelo Pontifício Instituto Bíblico de Roma. Superior Provincial dos Missionários Redentoristas, Província de Goiás."
+      "Frade menor capuchinho, doutor em Teologia pela Pontifícia Universidade Gregoriana de Roma, diplomado em Bens Culturais da Igreja e professor de Teologia."
   }
 ];
 

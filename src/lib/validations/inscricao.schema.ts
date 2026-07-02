@@ -25,7 +25,7 @@ export const inscricaoSchema = z
     sexo: required("Sexo"),
     estadoCivil: required("Estado civil"),
     telefoneWhatsapp: required("Telefone/WhatsApp").max(40),
-    emailContato: required("E-mail").email("Informe um e-mail valido."),
+    emailContato: required("E-mail").email("Coloque seu e-mail corretamente."),
     endereco: required("Endereco").max(240),
     cidade: required("Cidade").max(120),
     estado: required("Estado").max(80),

@@ -131,7 +131,12 @@ const englishSpeakers: typeof speakers = speakers.map((speaker, index) => ({
       bio:
         "Ordained a priest in 1999 after studying Philosophy at the Federal University of Parana and Theology at Studium Theologicum, of the Claretian Faculty of Theology. He specialized and earned a master's degree in Bioethics from Faculdade Sao Camilo, Sao Paulo (1999), and the Alphonsian Academy, Rome (2011), as well as a master's degree in Education from the Pontifical Catholic University of Parana and a doctorate in Moral Theology from the Alphonsian Academy. He is currently Secretary-General of the CNBB and Auxiliary Bishop of the Archdiocese of Brasilia."
     },
-    { name: "Friar Sidney Damasio Machado", role: "Curitiba" },
+    {
+      name: "Fr. Joao Paulo dos Santos, CSsR",
+      role: "Redemptorist Missionaries",
+      bio:
+        "Master in Biblical Exegesis from the Pontifical Biblical Institute in Rome. Provincial Superior of the Redemptorist Missionaries, Province of Goias."
+    },
     {
       name: "Cardinal Berhaneyesus Demerew Souraphiel",
       role: "Ethiopia",
@@ -150,12 +155,7 @@ const englishSpeakers: typeof speakers = speakers.map((speaker, index) => ({
       bio:
         "Priest of the Archdiocese of Juiz de Fora, with formation in Theology, Philosophy, and Moral Theology, and a doctoral candidate in Philosophy at the Pontifical Lateran University."
     },
-    {
-      name: "Fr. Joao Paulo dos Santos, CSsR",
-      role: "Redemptorist Missionaries",
-      bio:
-        "Master in Biblical Exegesis from the Pontifical Biblical Institute in Rome. Provincial Superior of the Redemptorist Missionaries, Province of Goias."
-    }
+    { name: "Friar Sidney Damasio Machado", role: "Curitiba" }
   ][index]
 }));
 
@@ -499,7 +499,12 @@ export const homeCopy: Record<"pt" | "en" | "it", HomeCopy> = {
         { name: "Cardinale Oscar Rodriguez Maradiaga", role: "Honduras" },
         { name: "Dom Joao Justino de Medeiros Silva", role: "Arcivescovo di Goiania" },
         { name: "Dom Ricardo Hoepers", role: "Segretario Generale della CNBB e Vescovo Ausiliare" },
-        { name: "Frate Sidney Damasio Machado", role: "Curitiba" },
+        {
+          name: "Fr. Joao Paulo dos Santos, CSsR",
+          role: "Missionari Redentoristi",
+          bio:
+            "Maestro in Esegesi Biblica presso il Pontificio Istituto Biblico di Roma. Superiore Provinciale dei Missionari Redentoristi, Provincia di Goias."
+        },
         {
           name: "Cardinale Berhaneyesus Demerew Souraphiel",
           role: "Etiopia",
@@ -518,12 +523,7 @@ export const homeCopy: Record<"pt" | "en" | "it", HomeCopy> = {
           bio:
             "Sacerdote dell'Arcidiocesi di Juiz de Fora, con formazione in Teologia, Filosofia e Teologia Morale, e dottorando in Filosofia presso la Pontificia Universita Lateranense."
         },
-        {
-          name: "Fr. Joao Paulo dos Santos, CSsR",
-          role: "Missionari Redentoristi",
-          bio:
-            "Maestro in Esegesi Biblica presso il Pontificio Istituto Biblico di Roma. Superiore Provinciale dei Missionari Redentoristi, Provincia di Goias."
-        }
+        { name: "Frate Sidney Damasio Machado", role: "Curitiba" }
       ][index]
     })),
     recommendations: {

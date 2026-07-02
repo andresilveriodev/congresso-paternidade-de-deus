@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { AutorizacaoFields } from "@/components/inscricao/AutorizacaoFields";
 import { CertificacaoFields } from "@/components/inscricao/CertificacaoFields";
 import { ContatosFields } from "@/components/inscricao/ContatosFields";
@@ -28,6 +28,84 @@ type RegistrationPageProps = {
   locale: Locale;
 };
 
+const requiredProgressFields: Array<keyof InscricaoFormData> = [
+  "nome",
+  "nomeCredencial",
+  "dataNascimento",
+  "nacionalidade",
+  "sexo",
+  "estadoCivil",
+  "telefoneWhatsapp",
+  "emailContato",
+  "endereco",
+  "cidade",
+  "estado",
+  "paisContato",
+  "cep",
+  "cargoFuncao",
+  "areaAtuacao",
+  "modalidadeParticipacao",
+  "tituloTrabalho",
+  "areaTematica",
+  "necessidadeEspecifica",
+  "hospedagemNecessita",
+  "participaraEventosCulturais",
+  "idiomaPreferencial",
+  "certificacaoDeseja",
+  "autorizacaoImagem",
+  "cidadeCompromisso",
+  "dataCompromisso",
+  "assinaturaCompromisso"
+];
+
+function hasProgressValue(value: unknown) {
+  if (Array.isArray(value)) {
+    return value.some(hasProgressValue);
+  }
+
+  return typeof value === "string" ? value.trim().length > 0 : Boolean(value);
+}
+
+function isAffirmativeProgressValue(value: unknown) {
+  return typeof value === "string" && (value.trim().toLowerCase().startsWith("s") || value.trim().toLowerCase() === "yes");
+}
+
+function hasStartedRegistration(values: Partial<InscricaoFormData>, hasUploads: boolean) {
+  return (
+    hasUploads ||
+    Object.entries(values).some(([key, value]) => key !== "locale" && hasProgressValue(value))
+  );
+}
+
+function getRegistrationProgress(values: Partial<InscricaoFormData>, hasUploads: boolean) {
+  let total = requiredProgressFields.length + 2;
+  let completed = requiredProgressFields.filter((field) => hasProgressValue(values[field])).length;
+
+  if (hasProgressValue(values.cpf) || hasProgressValue(values.passaporte)) {
+    completed += 1;
+  }
+
+  if (hasUploads) {
+    completed += 1;
+  }
+
+  if (isAffirmativeProgressValue(values.necessidadeEspecifica)) {
+    total += 1;
+    if (hasProgressValue(values.necessidadeQual)) {
+      completed += 1;
+    }
+  }
+
+  if (isAffirmativeProgressValue(values.certificacaoDeseja)) {
+    total += 1;
+    if (hasProgressValue(values.nomeCertificado)) {
+      completed += 1;
+    }
+  }
+
+  return Math.min(100, Math.round((completed / total) * 100));
+}
+
 export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps) {
   const router = useRouter();
   const [uploads, setUploads] = useState<UploadItem[]>([]);
@@ -36,11 +114,11 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
   const [uploadError, setUploadError] = useState<string>("");
   const {
     clearErrors,
+    control,
     handleSubmit,
     register,
     setError,
     setValue,
-    watch,
     formState: { errors, isSubmitting }
   } = useForm<InscricaoFormData>({
     defaultValues: {
@@ -48,16 +126,19 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
       necessidadesEspeciais: []
     }
   });
-  const necessidade = watch("necessidadeEspecifica");
-  const certificacao = watch("certificacaoDeseja");
+  const formValues = (useWatch({ control }) ?? {}) as Partial<InscricaoFormData>;
+  const necessidade = useWatch({ control, name: "necessidadeEspecifica" });
+  const certificacao = useWatch({ control, name: "certificacaoDeseja" });
   const requiresDescription = Boolean(necessidade?.toLowerCase().startsWith("s"));
   const requiresCertificateName = Boolean(certificacao?.toLowerCase().startsWith("s"));
+  const hasUploads = uploads.length > 0;
+  const hasProgressStarted = hasStartedRegistration(formValues, hasUploads);
+  const registrationProgress = getRegistrationProgress(formValues, hasUploads);
 
   useEffect(() => {
     if (!requiresCertificateName) {
       clearErrors("nomeCertificado");
       setValue("nomeCertificado", "");
-      setStatus("");
     }
   }, [clearErrors, requiresCertificateName, setValue]);
 
@@ -169,6 +250,18 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
         showRegistrationButton={false}
         variant="registration"
       />
+      {hasProgressStarted ? (
+        <div
+          aria-label="Progresso do formulario"
+          aria-valuemax={100}
+          aria-valuemin={0}
+          aria-valuenow={registrationProgress}
+          className="registration-progress"
+          role="progressbar"
+        >
+          <span style={{ transform: `scaleX(${registrationProgress / 100})` }} />
+        </div>
+      ) : null}
 
       <main className={`registration-page ${dragging ? "is-dragging" : ""}`}>
         <section className="registration-hero" aria-labelledby="registration-title">
@@ -184,7 +277,7 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
           </div>
         </section>
 
-        <form className="registration-form" id="formulario" onSubmit={handleSubmit(onSubmit)}>
+        <form className="registration-form" id="formulario" noValidate onSubmit={handleSubmit(onSubmit)}>
           <input type="hidden" value={locale} {...register("locale")} />
           <DadosPessoaisFields copy={copy} errors={errors} register={register} />
           <ContatosFields copy={copy} errors={errors} register={register} />

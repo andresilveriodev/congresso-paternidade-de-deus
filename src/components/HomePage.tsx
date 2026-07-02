@@ -77,6 +77,7 @@ export function HomePage({ home, labels, locale }: HomePageProps) {
         labels={labels}
         languageLabels={home.languages}
         locale={locale}
+        mobileBrandImage={images.markMenuMobile}
       />
 
       <main id="top">

@@ -7,6 +7,7 @@ import { localeNames, supportedLocales, type Locale } from "@/lib/i18n/locales";
 type HeaderProps = {
   brandHref: string;
   brandImage: string;
+  mobileBrandImage?: string;
   brandAlt: string;
   labels: Record<string, string>;
   locale: Locale;
@@ -24,13 +25,21 @@ export function Header({
   languageLabels,
   languagePathSuffix = "",
   locale,
+  mobileBrandImage,
   showRegistrationButton = true,
   variant = "home"
 }: HeaderProps) {
   return (
     <header className={`site-header ${variant === "registration" ? "registration-header" : "home-header"}`}>
       <Link className="brand" href={brandHref}>
-        <img alt={brandAlt} src={brandImage} />
+        {mobileBrandImage ? (
+          <picture>
+            <source media="(max-width: 700px)" srcSet={mobileBrandImage} />
+            <img alt={brandAlt} src={brandImage} />
+          </picture>
+        ) : (
+          <img alt={brandAlt} src={brandImage} />
+        )}
       </Link>
       <SiteMenu
         anchorPrefix={`/${locale}`}

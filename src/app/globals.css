@@ -185,6 +185,7 @@ img {
   display: none;
 }
 
+.home-header .brand picture,
 .home-header .brand img {
   max-height: 52px;
   width: 230;
@@ -276,9 +277,14 @@ img {
   width: 100%;
 }
 
+.brand picture,
 .brand img {
   max-height: 36px;
   object-fit: contain;
+}
+
+.brand picture {
+  display: block;
 }
 
 .language-switch {
@@ -2062,6 +2068,26 @@ img {
   background: var(--paper);
 }
 
+.registration-progress {
+  background: rgba(2, 30, 48, 0.1);
+  height: 4px;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 120;
+}
+
+.registration-progress span {
+  background: var(--gold);
+  display: block;
+  height: 100%;
+  transform-origin: left center;
+  transition: transform 220ms ease;
+  width: 100%;
+}
+
 .registration-page.is-dragging::before {
   background: rgba(0, 0, 0, 0.52);
   content: "";
@@ -2781,6 +2807,7 @@ img {
     padding: 24px 24px 0;
   }
 
+  .home-header .brand picture,
   .home-header .brand img {
     width: 236px;
   }
@@ -2867,10 +2894,12 @@ img {
     padding: 14px 12px 0;
   }
 
+  .brand picture,
   .brand img {
     max-height: 42px;
   }
 
+  .home-header .brand picture,
   .home-header .brand img {
     max-height: 48px;
     width: min(260px, 100%);
@@ -2977,6 +3006,10 @@ img {
     color: var(--white);
   }
 
+  .registration-header .mobile-menu-language a[aria-current="page"] {
+    color: var(--white);
+  }
+
   .home-header .mobile-menu-language {
     border-top-color: rgba(255, 255, 255, 0.16);
   }
@@ -3054,11 +3087,13 @@ img {
   }
 
   .speaker-name {
-    font-size: 10px;
+    font-size: 16px;
+    line-height: 1.2;
   }
 
   .speaker-role {
-    font-size: 10px;
+    font-size: 15px;
+    line-height: 1.25;
   }
 
   .info-grid span {
@@ -3118,9 +3153,9 @@ img {
   }
 
   .drawer-panel {
-    height: auto;
-    max-height: 100vh;
-    max-height: 100dvh;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
   }
 
   .drawer-content {
@@ -3169,13 +3204,18 @@ img {
 
   :is(.mystery-section, .formation-section) .tab-panel > .tab-image-stack,
   :is(.mystery-section, .formation-section) .tab-panel > img {
-    grid-row: 3;
+    grid-row: 2;
     margin-top: 22px;
+  }
+
+  :is(.mystery-section, .formation-section) .tab-panel > div {
+    grid-row: 3;
+    margin-top: 64px;
   }
 
   .formation-section .tab-panel > .formation-media {
     grid-column: 1;
-    grid-row: 3;
+    grid-row: 2;
     margin-top: 22px;
   }
 
@@ -3189,6 +3229,7 @@ img {
 
   :is(.mystery-section, .formation-section) .tab-list {
     grid-row: 4;
+    margin: 28px 0 0;
   }
 
   .formation-section .tab-list {
