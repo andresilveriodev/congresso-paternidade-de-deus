@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { AutorizacaoFields } from "@/components/inscricao/AutorizacaoFields";
@@ -107,7 +106,6 @@ function getRegistrationProgress(values: Partial<InscricaoFormData>, hasUploads:
 }
 
 export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps) {
-  const router = useRouter();
   const [uploads, setUploads] = useState<UploadItem[]>([]);
   const [dragging, setDragging] = useState(false);
   const [status, setStatus] = useState<string>("");
@@ -176,19 +174,13 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
     setStatus("");
 
     const parsed = inscricaoSchema.safeParse({ ...values, locale });
-    const missingUpload = uploads.length === 0;
 
-    if (!parsed.success || missingUpload) {
+    if (!parsed.success) {
       const fieldErrors = parsed.success ? {} : zodIssuesToFieldErrors(parsed.error);
-      if (!parsed.success) {
-        Object.entries(fieldErrors).forEach(([field, message]) => {
-          setError(field as keyof InscricaoFormData, { message });
-        });
-      }
-      if (missingUpload) {
-        setUploadError("Anexe o arquivo PDF.");
-      }
-      setStatus(missingUpload ? "Anexe o arquivo PDF antes de enviar." : Object.values(fieldErrors)[0] ?? "Revise os campos destacados.");
+      Object.entries(fieldErrors).forEach(([field, message]) => {
+        setError(field as keyof InscricaoFormData, { message });
+      });
+      setStatus(Object.values(fieldErrors)[0] ?? "Revise os campos destacados.");
       return;
     }
 
@@ -202,14 +194,21 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
     });
     uploads.forEach((upload) => formData.append("arquivos", upload.file));
 
-    const response = await fetch("/api/inscricoes", {
-      method: "POST",
-      body: formData
-    });
-    const result = (await response.json()) as ApiResponse<InscricaoCreationResult>;
+    let result: ApiResponse<InscricaoCreationResult>;
+
+    try {
+      const response = await fetch("/api/inscricao", {
+        method: "POST",
+        body: formData
+      });
+      result = (await response.json()) as ApiResponse<InscricaoCreationResult>;
+    } catch {
+      setStatus("Nao foi possivel enviar sua inscricao agora. Verifique sua conexao e tente novamente.");
+      return;
+    }
 
     if (result.success) {
-      router.push(result.data.redirectUrl);
+      window.location.assign(result.data.redirectUrl);
       return;
     }
 
