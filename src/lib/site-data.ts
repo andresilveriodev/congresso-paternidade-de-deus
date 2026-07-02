@@ -105,7 +105,7 @@ export const mysteryTabs = [
     summary:
       "O Santuário Basílica do Divino Pai Eterno acolhe o I Congresso Internacional de Teologia sobre a Paternidade de Deus.",
     detail:
-      "O Santuário Basílica do Divino Pai Eterno, em Trindade (Goiás/Brasil), é uma expressão eloquente da piedade popular brasileira e um patrimônio espiritual da Igreja no Brasil. Reconhecido como centro nacional de peregrinação, este lugar sagrado acolhe, anualmente, milhões de fiéis que aqui manifestam sua fé e experimentam a ternura do Pai que nos chama de filhos e filhas amados.\n\nFiel à sua missão evangelizadora e em diálogo com a tradição teológica da Igreja, o Santuário promoverá, de 09 a 13 de novembro de 2026, o I Congresso Internacional de Teologia sobre a Paternidade de Deus, reunindo teólogos, biblistas, liturgistas, pastoralistas, estudiosos da vida religiosa e cristãos leigos e leigas."
+      "O Santuário Basílica do Divino Pai Eterno, em Trindade (Goiás/Brasil), é uma expressão eloquente da piedade popular brasileira e um patrimônio espiritual da Igreja no Brasil. Reconhecido como centro nacional de peregrinação, este lugar sagrado acolhe, anualmente, milhões de fiéis que aqui manifestam sua fé e experimentam a ternura do Pai que nos chama de filhos e filhas amados.\n\nFiel à sua missão evangelizadora e em diálogo com a tradição teológica da Igreja, o Santuário promoverá, de <span>09 a 13 de novembro de 2026, o I Congresso Internacional de Teologia sobre a Paternidade de Deus,</span> reunindo teólogos, biblistas, liturgistas, pastoralistas, estudiosos da vida religiosa e cristãos leigos e leigas para aprofundar o mistério do Pai revelado em Jesus Cristo, celebrado na liturgia e vivido na piedade do povo de Deus."
   },
   {
     id: "fundamentacao",
@@ -114,7 +114,7 @@ export const mysteryTabs = [
     summary:
       "O Congresso nasce da experiência de fé vivida no Santuário, reconhecendo a piedade popular como lugar privilegiado de encontro com Deus Pai.",
     detail:
-      "O Congresso nasce do reconhecimento de que o Santuário do Divino Pai Eterno é um espaço privilegiado onde a fé do povo expressa e aprofunda a experiência da Paternidade divina. O evento pretende recolocar no centro da reflexão teológica e da práxis pastoral a experiência fundante de Deus como Pai, fonte da identidade eclesial e horizonte último da existência cristã.\n\nDiante da fragmentação dos vínculos familiares e sociais, refletir sobre a Paternidade divina oferece à sociedade um horizonte de sentido, reconciliação e fraternidade universal. Mais que um simpósio acadêmico, o Congresso deseja unir rigor científico, celebração litúrgica, expressão devocional e conversão pastoral."
+      "<span>1. O Santuário como locus theologicus da experiência do Pai</span>\n\nO Congresso nasce do reconhecimento de que o Santuário do Divino Pai Eterno é um espaço privilegiado onde a fé do povo expressa e aprofunda a experiência da Paternidade divina. Como afirma a Evangelii Gaudium, “na piedade popular pode-se perceber a modalidade em que a fé recebida se encarnou numa cultura e continua a transmitir-se” (EG 123).\n\n<span>2. Renovação cristocêntrica e trinitária da fé</span>\n\nO evento pretende recolocar no centro da reflexão teológica e da práxis pastoral a experiência fundante de Deus como Pai (Abbá), fonte da identidade eclesial e horizonte último da existência cristã. À luz da Revelação, redescobrimos que toda a vida cristã é resposta ao amor primordial do Pai: “a paternidade de Deus é amor infinito, ternura que se debruça sobre nós, filhos frágeis, necessitados de tudo” (Bento XVI, Audiência Geral, 30/01/2013).\n\n<span>3. Resposta teológico-pastoral à crise contemporânea de paternidade</span>\n\nDiante da fragmentação dos vínculos familiares e sociais, da crise das figuras de autoridade e do crescente individualismo, refletir sobre como a Paternidade divina oferece à sociedade um horizonte de sentido, reconciliação e fraternidade universal. Como ensina o Papa Francisco, Deus não é um ser distante ou anônimo, mas um Pai próximo, cheio de bondade e ternura (cf. Misericordiae Vultus).\n\n<span>4. Acolhida do Magistério Pontifício contemporâneo</span>\n\nO Congresso ecoa os apelos do Papa Francisco para que a Igreja testemunhe, de forma concreta, a ternura, a proximidade e a misericórdia — características que o Santo Padre identifica como “o estilo de Deus”. Está também em sintonia com o magistério de Bento XVI sobre o amor divino e com o ensinamento de São João Paulo II sobre a responsabilidade da paternidade.\n\nO Papa Leão XIV, no Angelus de 27 de julho de 2025, ensina que Jesus nos revela Deus Pai como aquele que manifesta a ternura do “Abbá”: um Pai próximo, amoroso e confiável, que acolhe seus filhos com simplicidade e confiança filial. Pela oração, especialmente o Pai-Nosso, descobrimos quem Ele é, e também quem somos nós: filhos amados, herdeiros de sua graça e sustentados por sua providência.\n\nAs imagens evangélicas nos mostram um Deus sempre disponível, que nunca fecha a porta, mesmo quando chegamos tarde, marcados por erros, cansaços ou oportunidades perdidas. Ele dá sempre o que é bom e age com sabedoria que supera nossa compreensão. Sua misericórdia ultrapassa nossas faltas e revela um amor que continuamente acolhe, perdoa e renova.\n\nAo chamarmos Deus de Pai, somos convidados a permitir que sua bondade transforme nosso coração, tornando-nos capazes de amar com paciência, brandura e solicitude, refletindo o rosto do Pai em nossas atitudes. A verdadeira filiação divina conduz à fraternidade: quem se reconhece filho aprende a ver nos outros seus irmãos, vivendo relações de cuidado, caridade e gratuidade. A liturgia, assim, nos introduz na doçura desse amor e nos envia a traduzi-lo em gestos concretos de bondade no cotidiano.\n\n<span>5. Perspectivas para a nova evangelização</span>\n\nEm contexto de pluralismo religioso e crescente secularização, o Congresso busca iluminar os caminhos da missão eclesial com categorias renovadas de comunhão, cuidado e esperança, todas fundadas na revelação da Paternidade divina como princípio (arché) e destino último (télos) da existência humana.\n\n<span>6. Contribuição para uma sociedade fraterna e solidária</span>\n\nRedescobrir o rosto paterno de Deus é reencontrar a raiz comum que nos constitui como irmãos em Cristo. Isso fortalece o compromisso da Igreja com a justiça social, a paz e o cuidado da Casa Comum (cf. Laudato Si’).\n\n<span>7. Integração entre lex orandi, lex credendi e lex vivendi</span>\n\nMais que um simpósio acadêmico, o Congresso deseja oferecer uma experiência integral que una rigor científico, celebração litúrgica, expressão devocional e conversão pastoral. Assim, testemunha-se a fecundidade do diálogo entre teologia e vida."
   }
 ];
 
@@ -123,26 +123,38 @@ export const formationTabs = [
     title: "Objetivo geral",
     image: "/formation/objetivo-geral.png",
     text:
-      "Promover reflexão e produção teológica sobre a Paternidade de Deus, articulando Sagrada Escritura, Tradição patrística e magisterial, Teologia Sistemática, Liturgia, Antropologia Teológica e Teologia Pastoral."
+      "Promover reflexão e produção teológica sobre a Paternidade de Deus, articulando Sagrada Escritura, Tradição patrística e magisterial, Teologia Sistemática, Liturgia, Antropologia Teológica e Teologia Pastoral, com o intuito de iluminar a fé do povo de Deus e fortalecer a missão evangelizadora da Igreja."
   },
   {
     title: "Objetivos específicos",
     image: "/formation/objetivos-especificos.png",
     text:
-      "Aprofundar o mistério da Paternidade de Deus no seio da Trindade; investigar a revelação bíblica da paternidade divina; dialogar com a teologia contemporânea; valorizar a piedade popular; fomentar a pesquisa teológica e estabelecer rede internacional de pesquisa."
+      "Aprofundar o mistério da Paternidade de Deus no seio da Trindade; investigar a revelação bíblica da paternidade divina; dialogar com a teologia contemporânea; valorizar a piedade popular; fomentar a pesquisa teológica e estabelecer rede internacional de pesquisa.",
+    detail:
+      "Aprofundar o mistério da Paternidade de Deus no seio da Trindade;\nInvestigar a revelação bíblica da paternidade divina sob a perspectiva exegética e teológica;\nRevisitar a herança patrística, medieval e moderna sobre o tema;\nDialogar com a teologia contemporânea e os desafios culturais atuais;\nExaminar criticamente a crise de paternidade e suas repercussões antropológicas e sociais;\nValorizar a piedade popular como expressão autêntica do sensus fidei;\nFomentar a pesquisa teológica mediante publicação de anais e artigos científicos;\nEstabelecer rede internacional de pesquisa sobre a Paternidade de Deus."
   },
   {
     title: "Promoção e chancela institucional",
     image: "/formation/promocao-chancela-institucional.png",
     logos,
     text:
-      "O Congresso é promovido pelo Santuário Basílica do Divino Pai Eterno e realizado sob a chancela da Arquidiocese de Goiânia, Província de Brasília, CNBB, Pontifícia Universidade Lateranense, PUC Goiás e IFITEG."
+      "O I Congresso Internacional de Teologia sobre a Paternidade de Deus é promovido pelo Santuário Basílica do Divino Pai Eterno, por meio de sua Comissão Organizadora.",
+    detail:
+      "O I Congresso Internacional de Teologia sobre a Paternidade de Deus é promovido pelo Santuário Basílica do Divino Pai Eterno, por meio de sua Comissão Organizadora, e realizado sob a chancela da Arquidiocese de Goiânia, da Congregação do Santíssimo Redentor – Província de Brasília, da Conferência Nacional dos Bispos do Brasil <span>(CNBB), da Pontifícia Universidade Lateranense, da Pontifícia Universidade Católica de Goiás e do Instituto de Filosofia e Teologia de Goiás (IFITEG)</span>."
   },
   {
     title: "Resultados esperados",
     image: "/formation/resultados-esperados.png",
     text:
       "Publicação de anais, elaboração de subsídios pastorais, constituição de rede internacional de pesquisa, fortalecimento do diálogo entre teologia acadêmica e piedade popular e contribuição para a formação permanente."
+  },
+  {
+    title: "Perspectiva acadêmica e metodológica",
+    image: "/formation/perspectiva-academica-metodologica.png",
+    text:
+      "O Congresso articula a tradição de 186 anos de devoção ao Divino Pai Eterno, celebrada em Trindade, com a atualidade da pesquisa teológica internacional, percorrendo:",
+    detail:
+      "O Congresso articula a tradição de 186 anos de devoção ao Divino Pai Eterno, celebrada em Trindade, com a atualidade da pesquisa teológica internacional, percorrendo:\n\nos fundamentos bíblicos e patrísticos da revelação do Pai;\nos desenvolvimentos conciliares e magisteriais, de Niceia ao Vaticano II;\nas sínteses teológicas clássicas e contemporâneas;\nas expressões litúrgicas e devocionais, com atenção especial à piedade popular como sensus fidei.\n\nDestinado a bispos, presbíteros, diáconos, religiosos e religiosas, docentes, pesquisadores, estudantes de teologia, agentes de pastoral e devotos do Divino Pai Eterno, o evento oferece um espaço privilegiado de formação permanente e atualização teológica. Busca integrar academia, liturgia, pastoral e piedade popular, gerando frutos duradouros para a vida da Igreja."
   }
 ];
 
@@ -233,22 +245,21 @@ export const recommendations = {
 export const ruleCards = [
   {
     title: "Normas de Submissão",
-    hideMoreButton: true,
     summary:
-      "O envio dos trabalhos deverá ser feito exclusivamente pelo formulário de inscrição do evento; até o dia 18/10/2026. (acesso através do QR CODE)",
+      "O envio dos trabalhos deverá ser feito exclusivamente pelo formulário de inscrição do evento: até o dia <span>18/10/2026. (acesso através do QR CODE)</span>",
     detail:
-      "O envio dos trabalhos deverá ser feito exclusivamente pelo formulário de inscrição do evento, até o dia 18/10/2026. É responsabilidade do participante conferir os dados informados no momento da inscrição."
+      "<span>IMPORTANTE:</span> É de responsabilidade do(a) participante, no momento da inscrição, inserir os dados do trabalho submetido (título, dados do autor ou coautores, se houver). Caso contrário, não será possível emitir o certificado de “trabalho apresentado”."
   },
   {
     title: "Submissão do resumo",
     summary: "Título, autores, instituição, resumo de até 150 palavras e palavras-chave.",
     detail:
-      "INFORMAÇÕES REQUERIDAS PARA SUBMISSÃO DO RESUMO DA COMUNICAÇÃO ORAL:\nTítulo do Trabalho. Autor ou coautores e instituição de origem. O resumo deverá ter no máximo 150 palavras, fonte Times New Roman 12, espaçamento 1,5. Palavras-chave: de 3 a 5, separadas por ponto-e-vírgula. Os resumos deverão ser encaminhados em arquivo Word ou equivalente.\n\nOs resumos aprovados permitem comunicação oral no Congresso. Após o evento, os autores serão convidados a publicar nos anais."
+      "• Título do trabalho.\n• Autor ou coautores e sua instituição de origem.\n• O texto do resumo deverá seguir as seguintes normas: máximo de 150 palavras, fonte Times New Roman 12, espaçamento entre linhas 1,5.\n• Palavras-chave: de 3 a 5 palavras, separadas por ponto-e-vírgula.\n• Os resumos deverão ser encaminhados em arquivo Word ou equivalente.\n• Observações:\n• Os resumos APROVADOS permitem ao autor (ou aos coautores) comunicar oralmente o tema proposto no Congresso.\n• Após o Congresso, os autores são convidados a publicar seus trabalhos nos anais do evento.\n• Os artigos enviados para os anais deverão possuir no mínimo 7 laudas e no máximo 10 laudas – incluindo referências e anexos. Deverão, além disso, ter a seguinte diagramação: fonte Times New Roman, tamanho 12, com espaçamento interlinear de 1,5, respeitando a seguinte sequência: Título // Título traduzido // Resumo // Palavras-chave // Resumo traduzido // Palavras-chave traduzidas // Introdução // Texto com subtítulos // Conclusão // Referências."
   },
   {
     title: "Comunicação oral",
     summary: "Apresentações de 10 minutos, com autor inscrito e trabalho aprovado.",
     detail:
-      "ORIENTAÇÕES PARA COMUNICAÇÃO ORAL DE TRABALHOS\nTempo de apresentação: 10 minutos. As comunicações poderão ter um autor ou até 3 coautores. O autor apresentador deverá estar inscrito no evento. As apresentações ocorrerão em 10, 11 e 12/11/2026, das 17h15 às 18h15. A ordem por salas será disponibilizada no site com antecedência mínima de uma semana."
+      "• Tempo de apresentação de trabalhos: 10 minutos.\n• As comunicações orais poderão ter um autor ou até 3 coautores.\n• O autor apresentador necessariamente deverá estar inscrito no evento.\n• A comunicação deve partir do trabalho com resumo aprovado.\n• Está previsto tempo para discussão e interação com os autores, através de perguntas por parte dos participantes, mediadas pela coordenação de cada sala.\n• Conforme o cronograma, os trabalhos serão apresentados em 10, 11 e 12/11/2026, das 17h15 às 18h15.\n• O detalhamento da ordem de trabalhos por salas será disponibilizado no site, com, no mínimo, uma semana de antecedência ao início do evento."
   }
 ];

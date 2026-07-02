@@ -26,7 +26,6 @@ export function Drawer({ open, title, subtitle, image, closeLabel, onClose, chil
           <span>{closeLabel}</span>
         </button>
         <div className="drawer-content">
-          <p className="section-kicker">Detalhes</p>
           <h2>{title}</h2>
           {subtitle ? <p className="drawer-subtitle">{subtitle}</p> : null}
           <div className="drawer-text">{children}</div>

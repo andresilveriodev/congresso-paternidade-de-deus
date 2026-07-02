@@ -1,5 +1,5 @@
-import { RegistrationPage } from "@/components/RegistrationPage";
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  return <RegistrationPage />;
+  redirect("/pt/inscricao");
 }
