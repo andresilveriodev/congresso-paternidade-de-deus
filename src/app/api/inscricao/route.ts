@@ -180,62 +180,95 @@ async function validateAndPrepareAttachments(files: File[]): Promise<BrevoAttach
 }
 
 async function sendBrevoEmail(payload: InscricaoFormData, attachments: BrevoAttachment[]) {
-  const apiKey = process.env.BREVO_API_KEY;
-  const senderName = process.env.BREVO_SENDER_NAME ?? "Congresso Pai Eterno";
-  const senderEmail = process.env.BREVO_SENDER_EMAIL ?? "inscricoes@congressopaieterno.com.br";
-  const destinationEmail = process.env.INSCRICAO_EMAIL_DESTINO;
-  const copyEmail = process.env.INSCRICAO_EMAIL_COPIA;
-  const backupEmail = process.env.INSCRICAO_EMAIL_BACKUP ?? "congressopaternidadededeus@gmail.com";
+  const apiKey = process.env.BREVO_API_KEY?.trim();
+  const senderName = process.env.BREVO_SENDER_NAME?.trim() || "Congresso Paternidade de Deus";
+  const senderEmail = process.env.BREVO_SENDER_EMAIL?.trim();
+  const destinationEmail = process.env.INSCRICAO_EMAIL_DESTINO?.trim();
+  const copyEmail = process.env.INSCRICAO_EMAIL_COPIA?.trim();
+  const backupEmail = process.env.INSCRICAO_EMAIL_BACKUP?.trim();
 
   if (!apiKey) {
     throw new Error("BREVO_API_KEY precisa estar configurada.");
+  }
+
+  if (!senderEmail) {
+    throw new Error("BREVO_SENDER_EMAIL precisa estar configurada.");
   }
 
   if (!destinationEmail) {
     throw new Error("INSCRICAO_EMAIL_DESTINO precisa estar configurado.");
   }
 
+  const bccRecipients = [
+    ...(copyEmail
+      ? [
+          {
+            email: copyEmail,
+            name: "Cópia Inscrições"
+          }
+        ]
+      : []),
+    ...(backupEmail
+      ? [
+          {
+            email: backupEmail,
+            name: "Backup Inscrições"
+          }
+        ]
+      : [])
+  ];
+
+  const brevoPayload = {
+    sender: {
+      name: senderName,
+      email: senderEmail
+    },
+    to: [
+      {
+        email: destinationEmail,
+        name: "Equipe de Inscrições"
+      }
+    ],
+    ...(bccRecipients.length > 0
+      ? {
+          bcc: bccRecipients
+        }
+      : {}),
+    replyTo: {
+      email: payload.emailContato,
+      name: payload.nome
+    },
+    subject: `Nova inscricao - ${payload.nome}`,
+    htmlContent: buildEmailHtml(payload, attachments),
+    ...(attachments.length > 0
+      ? {
+          attachment: attachments
+        }
+      : {})
+  };
+
   const response = await fetch(brevoEndpoint, {
     method: "POST",
     headers: {
       accept: "application/json",
-      "api-key": apiKey,
-      "content-type": "application/json"
+      "content-type": "application/json",
+      "api-key": apiKey
     },
-    body: JSON.stringify({
-      sender: {
-        email: senderEmail,
-        name: senderName
-      },
-      to: [
-        {
-          email: destinationEmail,
-          name: "Inscricoes Congresso"
-        }
-      ],
-      bcc: [
-        {
-          email: copyEmail,
-          name: "Copia Inscricoes"
-        },
-        {
-          email: backupEmail,
-          name: "Backup Inscricoes"
-        }
-      ].filter((item) => Boolean(item.email)),
-      replyTo: {
-        email: payload.emailContato,
-        name: payload.nome
-      },
-      subject: `Nova inscricao - ${payload.nome}`,
-      htmlContent: buildEmailHtml(payload, attachments),
-      attachment: attachments.length > 0 ? attachments : undefined
-    })
+    body: JSON.stringify(brevoPayload)
   });
 
   if (!response.ok) {
-    throw new Error(`A Brevo recusou o envio (${response.status}): ${await getResponseMessage(response)}`);
+    const errorText = await response.text();
+
+    console.error("Erro Brevo:", {
+      status: response.status,
+      body: errorText
+    });
+
+    throw new Error(`Erro Brevo: ${response.status}`);
   }
+
+  return response.json();
 }
 
 function buildEmailHtml(payload: InscricaoFormData, attachments: BrevoAttachment[]) {
