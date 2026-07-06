@@ -35,8 +35,9 @@ export const inscricaoSchema = z
     areaAtuacao: required("Area de atuacao"),
     areaOutraQual: z.string().trim().optional().default(""),
     modalidadeParticipacao: required("Modalidade de participacao"),
-    tituloTrabalho: required("Titulo do trabalho"),
-    areaTematica: required("Area tematica"),
+    apresentaraTrabalho: required("Apresentacao de trabalho academico"),
+    tituloTrabalho: z.string().trim().optional().default(""),
+    areaTematica: z.string().trim().optional().default(""),
     necessidadeEspecifica: required("Necessidade especifica"),
     necessidadeQual: z.string().trim().optional().default(""),
     necessidadesEspeciais: optionalStringArray,
@@ -65,6 +66,16 @@ export const inscricaoSchema = z
 
     if (isAffirmative(data.necessidadeEspecifica) && !data.necessidadeQual) {
       ctx.addIssue({ code: "custom", path: ["necessidadeQual"], message: "Descreva a necessidade especifica." });
+    }
+
+    if (isAffirmative(data.apresentaraTrabalho)) {
+      if (!data.tituloTrabalho) {
+        ctx.addIssue({ code: "custom", path: ["tituloTrabalho"], message: "Informe o titulo do trabalho." });
+      }
+
+      if (!data.areaTematica) {
+        ctx.addIssue({ code: "custom", path: ["areaTematica"], message: "Informe a area tematica." });
+      }
     }
 
     if (isAffirmative(data.certificacaoDeseja) && !data.nomeCertificado) {

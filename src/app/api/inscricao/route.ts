@@ -43,6 +43,7 @@ const fieldSections = [
       ["areaAtuacao", "Area de atuacao"],
       ["areaOutraQual", "Outra area"],
       ["modalidadeParticipacao", "Modalidade de participacao"],
+      ["apresentaraTrabalho", "Vai apresentar trabalho academico"],
       ["tituloTrabalho", "Titulo do trabalho"],
       ["areaTematica", "Area tematica"]
     ]

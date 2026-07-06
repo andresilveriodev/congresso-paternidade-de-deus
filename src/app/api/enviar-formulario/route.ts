@@ -24,8 +24,7 @@ const requiredFields = [
   { key: "cargoFuncao", label: "Cargo/Funcao" },
   { key: "areaAtuacao", label: "Area de atuacao" },
   { key: "modalidadeParticipacao", label: "Modalidade de participacao" },
-  { key: "tituloTrabalho", label: "Titulo do trabalho" },
-  { key: "areaTematica", label: "Area tematica" },
+  { key: "apresentaraTrabalho", label: "Apresentacao de trabalho academico" },
   { key: "necessidadeEspecifica", label: "Necessidade especifica" },
   { key: "hospedagemNecessita", label: "Hospedagem" },
   { key: "participaraEventosCulturais", label: "Eventos culturais" },
@@ -72,6 +71,7 @@ const emailSections = [
     title: "Modalidade e trabalho academico",
     fields: [
       ["modalidadeParticipacao", "Modalidade de participacao"],
+      ["apresentaraTrabalho", "Vai apresentar trabalho academico"],
       ["tituloTrabalho", "Titulo do trabalho"],
       ["areaTematica", "Area tematica"]
     ]
@@ -115,6 +115,16 @@ export async function POST(request: Request) {
     const payload = getPayload(formData);
     const files = formData.getAll("arquivos").filter((file): file is File => file instanceof File);
     const missing = requiredFields.filter(({ key }) => !getPayloadValue(payload, key).trim());
+
+    if (isAffirmative(getPayloadValue(payload, "apresentaraTrabalho"))) {
+      if (!getPayloadValue(payload, "tituloTrabalho").trim()) {
+        missing.push({ key: "tituloTrabalho", label: "Titulo do trabalho" });
+      }
+
+      if (!getPayloadValue(payload, "areaTematica").trim()) {
+        missing.push({ key: "areaTematica", label: "Area tematica" });
+      }
+    }
 
     if (missing.length > 0) {
       return NextResponse.json(
@@ -289,6 +299,11 @@ function getPayloadValue(payload: Payload, key: string) {
   }
 
   return value ?? "";
+}
+
+function isAffirmative(value: string) {
+  const normalized = value.trim().toLowerCase();
+  return normalized.startsWith("s") || normalized === "yes";
 }
 
 function escapeHtml(value: string) {

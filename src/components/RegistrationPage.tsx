@@ -44,8 +44,7 @@ const requiredProgressFields: Array<keyof InscricaoFormData> = [
   "cargoFuncao",
   "areaAtuacao",
   "modalidadeParticipacao",
-  "tituloTrabalho",
-  "areaTematica",
+  "apresentaraTrabalho",
   "necessidadeEspecifica",
   "hospedagemNecessita",
   "participaraEventosCulturais",
@@ -76,15 +75,11 @@ function hasStartedRegistration(values: Partial<InscricaoFormData>, hasUploads: 
   );
 }
 
-function getRegistrationProgress(values: Partial<InscricaoFormData>, hasUploads: boolean) {
-  let total = requiredProgressFields.length + 2;
+function getRegistrationProgress(values: Partial<InscricaoFormData>) {
+  let total = requiredProgressFields.length + 1;
   let completed = requiredProgressFields.filter((field) => hasProgressValue(values[field])).length;
 
   if (hasProgressValue(values.cpf) || hasProgressValue(values.passaporte)) {
-    completed += 1;
-  }
-
-  if (hasUploads) {
     completed += 1;
   }
 
@@ -98,6 +93,16 @@ function getRegistrationProgress(values: Partial<InscricaoFormData>, hasUploads:
   if (isAffirmativeProgressValue(values.certificacaoDeseja)) {
     total += 1;
     if (hasProgressValue(values.nomeCertificado)) {
+      completed += 1;
+    }
+  }
+
+  if (isAffirmativeProgressValue(values.apresentaraTrabalho)) {
+    total += 2;
+    if (hasProgressValue(values.tituloTrabalho)) {
+      completed += 1;
+    }
+    if (hasProgressValue(values.areaTematica)) {
       completed += 1;
     }
   }
@@ -127,11 +132,13 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
   const formValues = (useWatch({ control }) ?? {}) as Partial<InscricaoFormData>;
   const necessidade = useWatch({ control, name: "necessidadeEspecifica" });
   const certificacao = useWatch({ control, name: "certificacaoDeseja" });
+  const apresentaraTrabalho = useWatch({ control, name: "apresentaraTrabalho" });
   const requiresDescription = Boolean(necessidade?.toLowerCase().startsWith("s"));
   const requiresCertificateName = Boolean(certificacao?.toLowerCase().startsWith("s"));
+  const willPresentPaper = isAffirmativeProgressValue(apresentaraTrabalho);
   const hasUploads = uploads.length > 0;
   const hasProgressStarted = hasStartedRegistration(formValues, hasUploads);
-  const registrationProgress = getRegistrationProgress(formValues, hasUploads);
+  const registrationProgress = getRegistrationProgress(formValues);
 
   useEffect(() => {
     if (!requiresCertificateName) {
@@ -139,6 +146,17 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
       setValue("nomeCertificado", "");
     }
   }, [clearErrors, requiresCertificateName, setValue]);
+
+  useEffect(() => {
+    if (!willPresentPaper) {
+      clearErrors(["tituloTrabalho", "areaTematica"]);
+      setValue("tituloTrabalho", "");
+      setValue("areaTematica", "");
+      setUploads([]);
+      setUploadError("");
+      setDragging(false);
+    }
+  }, [clearErrors, setValue, willPresentPaper]);
 
   const addFiles = (fileList: FileList | null) => {
     if (!fileList) return;
@@ -192,7 +210,9 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
         formData.append(key, String(value));
       }
     });
-    uploads.forEach((upload) => formData.append("arquivos", upload.file));
+    if (isAffirmativeProgressValue(parsed.data.apresentaraTrabalho)) {
+      uploads.forEach((upload) => formData.append("arquivos", upload.file));
+    }
 
     let result: ApiResponse<InscricaoCreationResult>;
 
@@ -292,6 +312,7 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
             register={register}
             uploadError={uploadError}
             uploads={uploads}
+            willPresentPaper={willPresentPaper}
           />
           <NecessidadesFields copy={copy} errors={errors} register={register} requiresDescription={requiresDescription} />
           <HospedagemFields copy={copy} errors={errors} register={register} />

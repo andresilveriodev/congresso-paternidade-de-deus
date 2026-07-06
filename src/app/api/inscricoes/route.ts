@@ -17,10 +17,6 @@ export async function POST(request: Request) {
       return apiError("Revise os campos obrigatórios antes de continuar.", 400, zodIssuesToFieldErrors(parsed.error));
     }
 
-    if (files.length === 0) {
-      return apiError("Anexe o arquivo PDF antes de enviar.", 400, { arquivos: "Anexe o arquivo PDF." });
-    }
-
     const attachments = await validateAndPrepareAttachments(files);
     const data = await createInscricao(parsed.data, attachments);
 

@@ -35,6 +35,7 @@ const emailSections = [
       ["cargoFuncao", "Cargo/Função"],
       ["areaAtuacao", "Área de atuação"],
       ["modalidadeParticipacao", "Modalidade de participação"],
+      ["apresentaraTrabalho", "Vai apresentar trabalho acadêmico"],
       ["tituloTrabalho", "Título do trabalho"],
       ["areaTematica", "Área temática"]
     ]
