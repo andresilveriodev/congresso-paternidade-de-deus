@@ -18,7 +18,7 @@ export function DadosPessoaisFields({
     <FormSection className="personal-fieldset" title={fields.personal}>
       <PlainInput className="span-full" error={errors.nome?.message} label={fields.fullName} {...register("nome", { required: copy.required })} />
       <PlainInput className="span-full" error={errors.nomeCredencial?.message} label={fields.badgeName} {...register("nomeCredencial", { required: copy.required })} />
-      <PlainInput error={errors.dataNascimento?.message} label={fields.birthDate} type="date" {...register("dataNascimento", { required: copy.required })} />
+      <PlainInput error={errors.dataNascimento?.message} label={fields.birthDate} {...register("dataNascimento", { required: copy.required })} />
       <PlainInput error={errors.cpf?.message} label={fields.cpf} {...register("cpf")} />
       <PlainInput error={errors.passaporte?.message} label={fields.passport} {...register("passaporte")} />
       <PlainInput error={errors.nacionalidade?.message} label={fields.nationality} {...register("nacionalidade", { required: copy.required })} />
