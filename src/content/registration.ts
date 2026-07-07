@@ -51,7 +51,7 @@ export const registrationContent: Record<"pt" | "en" | "it", RegistrationCopy> =
     languageLabels: { en: "Inglês", pt: "Português", it: "Italiano" },
     required: "Obrigatório",
     submitting: "Enviando...",
-    submit: "Fazer inscrição",
+    submit: "Continuar para o pagamento",
     remove: "Remover",
     fileButton: "Anexar arquivo PDF",
     hero: [
@@ -109,7 +109,11 @@ export const registrationContent: Record<"pt" | "en" | "it", RegistrationCopy> =
         "Declaro que as informações prestadas são verdadeiras e que estou ciente das normas de participação do Congresso.",
       commitmentCity: "Cidade:",
       commitmentDate: "Data:",
-      signature: "Assinatura:"
+      signature: "Assinatura:",
+      termsAcceptancePrefix: "Li e aceito os",
+      termsAcceptanceLink: "Termos de Uso",
+      termsAcceptanceSuffix: " para continuar a inscrição.",
+      termsAcceptanceError: "Aceite os Termos de Uso para continuar."
     },
     yesNo: ["Sim", "Não"],
     sexoOptions,
@@ -181,7 +185,11 @@ export const registrationContent: Record<"pt" | "en" | "it", RegistrationCopy> =
       commitmentText: "I declare that the information provided is true and that I am aware of the Congress participation rules.",
       commitmentCity: "City:",
       commitmentDate: "Date:",
-      signature: "Signature:"
+      signature: "Signature:",
+      termsAcceptancePrefix: "I have read and accept the",
+      termsAcceptanceLink: "Terms of Use",
+      termsAcceptanceSuffix: " to continue registration.",
+      termsAcceptanceError: "Accept the Terms of Use to continue."
     },
     yesNo: ["Yes", "No"],
     sexoOptions: ["Male", "Female"],
@@ -253,7 +261,11 @@ export const registrationContent: Record<"pt" | "en" | "it", RegistrationCopy> =
       commitmentText: "Dichiaro che le informazioni fornite sono veritiere e di essere a conoscenza del regolamento di partecipazione al Congresso.",
       commitmentCity: "Città:",
       commitmentDate: "Data:",
-      signature: "Firma:"
+      signature: "Firma:",
+      termsAcceptancePrefix: "Ho letto e accetto i",
+      termsAcceptanceLink: "Termini di utilizzo",
+      termsAcceptanceSuffix: " per continuare l'iscrizione.",
+      termsAcceptanceError: "Accetta i Termini di utilizzo per continuare."
     },
     yesNo: ["Sì", "No"],
     sexoOptions: ["Maschio", "Femmina"],

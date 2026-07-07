@@ -24,7 +24,7 @@ type ProgramacaoTabsProps = {
 };
 
 export function ProgramacaoTabs({ days, schedule }: ProgramacaoTabsProps) {
-  const [scheduleDay, setScheduleDay] = useState(1);
+  const [scheduleDay, setScheduleDay] = useState(0);
   const selectedDay = schedule[scheduleDay] ?? schedule[0];
 
   return (

@@ -15,8 +15,8 @@ export function InformacoesGeraisSection({
         <SplitTitle first={title[0]} second={title[1]} />
       </div>
       <div className="info-grid">
-        {info.map(([itemTitle, text]) => (
-          <article key={itemTitle}>
+        {info.map(([itemTitle, text], index) => (
+          <article className={index === 0 || index === 2 ? "info-card-highlight-value" : undefined} key={itemTitle}>
             <span>{itemTitle}</span>
             <p>{text}</p>
           </article>

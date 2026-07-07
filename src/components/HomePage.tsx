@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Drawer } from "@/components/Drawer";
+import { getLegalFooterLinks } from "@/content/legal";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ConferencistasSection } from "@/components/sections/home/ConferencistasSection";
@@ -66,6 +67,7 @@ function TextLines({ text }: { text: string }) {
 
 export function HomePage({ home, labels, locale }: HomePageProps) {
   const [drawer, setDrawer] = useState<DrawerState>(null);
+  const legalLinks = getLegalFooterLinks(locale);
   const showIndications = false;
 
   return (
@@ -153,7 +155,11 @@ export function HomePage({ home, labels, locale }: HomePageProps) {
         />
       </main>
 
-      <Footer logo={images.markDark} text={home.footer} />
+      <Footer
+        links={legalLinks.map((link) => ({ href: `/${locale}/${link.href}`, label: link.label }))}
+        logo={images.markDark}
+        text={home.footer}
+      />
 
       <Drawer
         closeLabel={labels.close}

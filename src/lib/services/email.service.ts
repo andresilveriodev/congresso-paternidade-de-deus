@@ -50,7 +50,8 @@ const emailSections = [
       ["idiomaPreferencial", "Idioma preferencial"],
       ["certificacaoDeseja", "Deseja certificado"],
       ["nomeCertificado", "Nome no certificado"],
-      ["autorizacaoImagem", "Autorização de imagem"]
+      ["autorizacaoImagem", "Autorização de imagem"],
+      ["aceiteTermos", "Aceitou os Termos de Uso"]
     ]
   }
 ] satisfies Array<{ title: string; fields: Array<[keyof InscricaoFormData, string]> }>;
@@ -145,6 +146,10 @@ function buildEmailRow(label: string, value: string) {
 function getPayloadValue(value: unknown) {
   if (Array.isArray(value)) {
     return value.filter(Boolean).join(", ");
+  }
+
+  if (typeof value === "boolean") {
+    return value ? "Sim" : "Não";
   }
 
   return typeof value === "string" ? value : "";

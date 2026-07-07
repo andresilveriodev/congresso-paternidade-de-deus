@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Drawer } from "@/components/Drawer";
+import { AceiteTermosField } from "@/components/inscricao/AceiteTermosField";
 import { useForm, useWatch } from "react-hook-form";
 import { AutorizacaoFields } from "@/components/inscricao/AutorizacaoFields";
 import { CertificacaoFields } from "@/components/inscricao/CertificacaoFields";
@@ -15,6 +17,7 @@ import { TermoFields } from "@/components/inscricao/TermoFields";
 import { TrabalhoAcademicoFields, type UploadItem } from "@/components/inscricao/TrabalhoAcademicoFields";
 import { VinculoFields } from "@/components/inscricao/VinculoFields";
 import { Header } from "@/components/layout/Header";
+import { getLegalPages } from "@/content/legal";
 import { inscricaoSchema, zodIssuesToFieldErrors } from "@/lib/validations/inscricao.schema";
 import { images } from "@/lib/site-data";
 import type { ApiResponse } from "@/types/api";
@@ -53,7 +56,8 @@ const requiredProgressFields: Array<keyof InscricaoFormData> = [
   "autorizacaoImagem",
   "cidadeCompromisso",
   "dataCompromisso",
-  "assinaturaCompromisso"
+  "assinaturaCompromisso",
+  "aceiteTermos"
 ];
 
 function hasProgressValue(value: unknown) {
@@ -111,6 +115,8 @@ function getRegistrationProgress(values: Partial<InscricaoFormData>) {
 }
 
 export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps) {
+  const legalPages = getLegalPages(locale);
+  const [termsDrawerOpen, setTermsDrawerOpen] = useState(false);
   const [uploads, setUploads] = useState<UploadItem[]>([]);
   const [dragging, setDragging] = useState(false);
   const [status, setStatus] = useState<string>("");
@@ -152,11 +158,16 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
       clearErrors(["tituloTrabalho", "areaTematica"]);
       setValue("tituloTrabalho", "");
       setValue("areaTematica", "");
+    }
+  }, [clearErrors, setValue, willPresentPaper]);
+
+  const handlePaperAnswerChange = (value: string) => {
+    if (!isAffirmativeProgressValue(value)) {
       setUploads([]);
       setUploadError("");
       setDragging(false);
     }
-  }, [clearErrors, setValue, willPresentPaper]);
+  };
 
   const addFiles = (fileList: FileList | null) => {
     if (!fileList) return;
@@ -195,6 +206,9 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
 
     if (!parsed.success) {
       const fieldErrors = parsed.success ? {} : zodIssuesToFieldErrors(parsed.error);
+      if (fieldErrors.aceiteTermos) {
+        fieldErrors.aceiteTermos = copy.fields.termsAcceptanceError;
+      }
       Object.entries(fieldErrors).forEach(([field, message]) => {
         setError(field as keyof InscricaoFormData, { message });
       });
@@ -308,6 +322,7 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
             errors={errors}
             onAddFiles={addFiles}
             onDraggingChange={setDragging}
+            onPaperAnswerChange={handlePaperAnswerChange}
             onRemoveUpload={(id) => setUploads((current) => current.filter((item) => item.id !== id))}
             register={register}
             uploadError={uploadError}
@@ -325,10 +340,35 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
           />
           <AutorizacaoFields copy={copy} errors={errors} register={register} />
           <TermoFields copy={copy} errors={errors} register={register} />
+          <AceiteTermosField
+            copy={copy}
+            errors={errors}
+            onOpenTerms={() => setTermsDrawerOpen(true)}
+            register={register}
+          />
           <SubmitInscricaoButton isSubmitting={isSubmitting} label={copy.submit} loadingLabel={copy.submitting} />
           {status ? <p className="form-status">{status}</p> : null}
         </form>
       </main>
+
+      <Drawer
+        closeLabel={labels.close}
+        onClose={() => setTermsDrawerOpen(false)}
+        open={termsDrawerOpen}
+        title={legalPages.terms.title}
+      >
+        <div className="terms-drawer-content">
+          <p>{legalPages.terms.description}</p>
+          {legalPages.terms.sections.map((section) => (
+            <section key={section.title}>
+              <h3>{section.title}</h3>
+              {section.paragraphs?.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </section>
+          ))}
+        </div>
+      </Drawer>
     </>
   );
 }

@@ -13,6 +13,10 @@ const optionalStringArray = z.preprocess((value) => {
   return Array.isArray(value) ? value : [value];
 }, z.array(z.string()).default([]));
 
+const acceptedTerms = z
+  .preprocess((value) => value === true || value === "true" || value === "on" || value === "aceito", z.boolean())
+  .refine((value) => value, "Aceite os Termos de Uso para continuar.");
+
 export const inscricaoSchema = z
   .object({
     locale: z.enum(["pt", "en", "it"]).default("pt"),
@@ -51,7 +55,8 @@ export const inscricaoSchema = z
     autorizacaoImagem: required("Autorizacao de imagem"),
     cidadeCompromisso: required("Cidade"),
     dataCompromisso: required("Data"),
-    assinaturaCompromisso: required("Assinatura")
+    assinaturaCompromisso: required("Assinatura"),
+    aceiteTermos: acceptedTerms
   })
   .superRefine((data, ctx) => {
     const isForeign = data.nacionalidade && data.nacionalidade.toLowerCase() !== "brasileira";

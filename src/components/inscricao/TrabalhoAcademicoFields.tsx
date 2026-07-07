@@ -17,6 +17,7 @@ export function TrabalhoAcademicoFields({
   errors,
   onAddFiles,
   onDraggingChange,
+  onPaperAnswerChange,
   onRemoveUpload,
   register,
   uploadError,
@@ -28,6 +29,7 @@ export function TrabalhoAcademicoFields({
   errors: FieldErrors<InscricaoFormData>;
   onAddFiles: (fileList: FileList | null) => void;
   onDraggingChange: (value: boolean) => void;
+  onPaperAnswerChange: (value: string) => void;
   onRemoveUpload: (id: string) => void;
   register: UseFormRegister<InscricaoFormData>;
   uploadError?: string;
@@ -43,7 +45,10 @@ export function TrabalhoAcademicoFields({
         label={fields.paperQuestion}
         name="apresentaraTrabalho"
         options={copy.yesNo}
-        register={register("apresentaraTrabalho", { required: copy.required })}
+        register={register("apresentaraTrabalho", {
+          required: copy.required,
+          onChange: (event) => onPaperAnswerChange(String(event.target.value))
+        })}
       />
       {willPresentPaper ? (
         <>

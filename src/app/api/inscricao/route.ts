@@ -74,7 +74,8 @@ const fieldSections = [
       ["autorizacaoImagem", "Autorizacao de imagem"],
       ["cidadeCompromisso", "Cidade do compromisso"],
       ["dataCompromisso", "Data do compromisso"],
-      ["assinaturaCompromisso", "Assinatura"]
+      ["assinaturaCompromisso", "Assinatura"],
+      ["aceiteTermos", "Aceitou os Termos de Uso"]
     ]
   }
 ] satisfies Array<{ title: string; fields: Array<[keyof InscricaoFormData, string]> }>;
@@ -388,6 +389,10 @@ function addSearchParam(url: URL, key: string, value: string) {
 function getPayloadValue(value: unknown) {
   if (Array.isArray(value)) {
     return value.filter(Boolean).join(", ");
+  }
+
+  if (typeof value === "boolean") {
+    return value ? "Sim" : "Nao";
   }
 
   return typeof value === "string" ? value : "";
