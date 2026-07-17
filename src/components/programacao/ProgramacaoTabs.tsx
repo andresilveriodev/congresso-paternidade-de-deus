@@ -19,17 +19,18 @@ function ScheduleText({ text }: { text: string }) {
 }
 
 type ProgramacaoTabsProps = {
+  ariaLabel: string;
   days: Array<{ label: string; day: string; month: string }>;
   schedule: Array<{ day: string; items: string[][] }>;
 };
 
-export function ProgramacaoTabs({ days, schedule }: ProgramacaoTabsProps) {
+export function ProgramacaoTabs({ ariaLabel, days, schedule }: ProgramacaoTabsProps) {
   const [scheduleDay, setScheduleDay] = useState(0);
   const selectedDay = schedule[scheduleDay] ?? schedule[0];
 
   return (
     <>
-      <div className="schedule-tabs" aria-label="Dias da programação">
+      <div className="schedule-tabs" aria-label={ariaLabel}>
         {schedule.map((day, index) => (
           <button
             aria-pressed={scheduleDay === index}

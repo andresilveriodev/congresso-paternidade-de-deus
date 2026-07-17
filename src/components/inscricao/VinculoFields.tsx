@@ -6,11 +6,13 @@ import type { InscricaoFormData, RegistrationCopy } from "@/types/inscricao";
 export function VinculoFields({
   copy,
   errors,
-  register
+  register,
+  showOtherAreaField
 }: {
   copy: RegistrationCopy;
   errors: FieldErrors<InscricaoFormData>;
   register: UseFormRegister<InscricaoFormData>;
+  showOtherAreaField: boolean;
 }) {
   const fields = copy.fields;
 
@@ -18,7 +20,7 @@ export function VinculoFields({
     <FormSection className="vinculo-fieldset" title={fields.affiliation}>
       <RadioGroup error={errors.cargoFuncao?.message} label={fields.role} name="cargoFuncao" options={copy.cargoOptions} register={register("cargoFuncao", { required: copy.required })} />
       <RadioGroup error={errors.areaAtuacao?.message} label={fields.field} name="areaAtuacao" options={copy.areaAtuacaoOptions} register={register("areaAtuacao", { required: copy.required })} />
-      <InlineLineField error={errors.areaOutraQual?.message} label={fields.other} register={register("areaOutraQual")} />
+      {showOtherAreaField ? <InlineLineField error={errors.areaOutraQual?.message} label={fields.other} register={register("areaOutraQual")} /> : null}
     </FormSection>
   );
 }

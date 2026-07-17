@@ -325,6 +325,11 @@ const localizedLegalFooterLinks: Record<Locale, typeof legalFooterLinks> = {
     { href: "politica-de-privacidade", label: "Privacy Policy" },
     { href: "seguranca", label: "Security" }
   ],
+  es: [
+    { href: "termos-de-uso", label: "Términos de Uso" },
+    { href: "politica-de-privacidade", label: "Política de Privacidad" },
+    { href: "seguranca", label: "Seguridad" }
+  ],
   it: [
     { href: "termos-de-uso", label: "Termini di utilizzo" },
     { href: "politica-de-privacidade", label: "Informativa sulla privacy" },
@@ -395,6 +400,68 @@ const localizedLegalCopy: Record<
         "7. Deprecated endpoints disabled",
         "8. Operational security and LGPD documentation",
         "9. Third parties considered in data processing"
+      ]
+    }
+  },
+  es: {
+    terms: {
+      title: "Términos de Uso",
+      eyebrow: "Términos legales",
+      description:
+        "Normas para el acceso al sitio, la inscripción, el envío de trabajos, la participación en el evento, los registros de imagen y voz y las responsabilidades del usuario.",
+      updatedAt: "Actualizado para el Congreso Internacional 2026 sobre la Paternidad de Dios.",
+      sectionTitles: [
+        "1. Aceptación de los términos",
+        "2. Finalidad del sitio e información del evento",
+        "3. Inscripción y responsabilidad del participante",
+        "4. Pagos, cancelaciones y comprobantes",
+        "5. Acreditación, conducta y seguridad",
+        "6. Trabajos científicos y contenido enviado",
+        "7. Imagen, voz y registros del evento",
+        "8. Propiedad intelectual",
+        "9. Uso prohibido del sitio",
+        "10. Limitación de responsabilidad",
+        "11. Protección de datos y privacidad",
+        "12. Disposiciones finales"
+      ]
+    },
+    privacy: {
+      title: "Política de Privacidad",
+      eyebrow: "Privacidad y LGPD",
+      description:
+        "Cómo pueden tratarse los datos personales relacionados con el Congreso, las inscripciones, comunicaciones, certificados, trabajos científicos, imágenes, videos y logística del evento.",
+      updatedAt: "Actualizado para el Congreso Internacional 2026 sobre la Paternidad de Dios.",
+      sectionTitles: [
+        "1. Responsable, alcance y aplicación",
+        "2. Datos personales recopilados",
+        "3. Datos sensibles y situaciones especiales",
+        "4. Finalidades del tratamiento",
+        "5. Bases legales",
+        "6. Imagen, voz, videos y testimonios",
+        "7. Trabajos científicos, certificados y actas",
+        "8. Intercambio y proveedores",
+        "9. Seguridad, conservación y eliminación",
+        "10. Cookies, registros y seguridad del sitio",
+        "11. Derechos del titular",
+        "12. Actualizaciones y contacto"
+      ]
+    },
+    security: {
+      title: "Seguridad",
+      eyebrow: "Protecciones técnicas",
+      description:
+        "Resumen de las medidas de seguridad, privacidad y reducción de exposición de datos personales implementadas en el proyecto.",
+      updatedAt: "Basado en la implementación actual del proyecto.",
+      sectionTitles: [
+        "1. Encabezados de seguridad",
+        "2. Protección del formulario de inscripción",
+        "3. Validación y sanitización de datos",
+        "4. Protección contra inyección en correos electrónicos",
+        "5. Seguridad de las cargas de archivos",
+        "6. Reducción de la exposición de datos personales",
+        "7. Endpoints anteriores desactivados",
+        "8. Documentación operativa de seguridad y LGPD",
+        "9. Terceros considerados en el tratamiento de datos"
       ]
     }
   },

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { type MouseEvent, useState } from "react";
 import { ArrowIcon } from "@/components/ArrowIcon";
-import { registrationPath } from "@/lib/constants/routes";
+import { hotmartCheckoutUrl } from "@/lib/constants/routes";
 import { localeNames, supportedLocales, type Locale } from "@/lib/i18n/locales";
 
 type SiteMenuProps = {
@@ -15,6 +15,13 @@ type SiteMenuProps = {
 };
 
 let activeAnchorScrollFrame: number | null = null;
+
+const menuA11y: Record<Locale, { close: string; label: string; open: string }> = {
+  pt: { close: "Fechar menu", label: "Menu principal", open: "Abrir menu" },
+  en: { close: "Close menu", label: "Main menu", open: "Open menu" },
+  es: { close: "Cerrar menú", label: "Menú principal", open: "Abrir menú" },
+  it: { close: "Chiudi menu", label: "Menu principale", open: "Apri menu" }
+};
 
 function easeInOutCubic(progress: number) {
   return progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
@@ -62,6 +69,7 @@ export function SiteMenu({
   showRegistrationButton = true
 }: SiteMenuProps) {
   const [open, setOpen] = useState(false);
+  const menuLabels = menuA11y[locale ?? "pt"];
   const links = [
     { label: labels.schedule, href: `${anchorPrefix}#programacao` },
     { label: labels.speakers, href: `${anchorPrefix}#conferencistas` },
@@ -98,7 +106,7 @@ export function SiteMenu({
       <button
         aria-controls="site-main-menu"
         aria-expanded={open}
-        aria-label={open ? "Fechar menu" : "Abrir menu"}
+        aria-label={open ? menuLabels.close : menuLabels.open}
         className="menu-toggle"
         onClick={() => setOpen((current) => !current)}
         type="button"
@@ -107,17 +115,17 @@ export function SiteMenu({
         <span />
         <span />
       </button>
-      <nav aria-label="Menu principal" className={`main-menu${open ? " is-open" : ""}`} id="site-main-menu">
+      <nav aria-label={menuLabels.label} className={`main-menu${open ? " is-open" : ""}`} id="site-main-menu">
         {links.map((item) => (
           <a href={item.href} key={item.label} onClick={(event) => handleAnchorClick(item.href, event)}>
             {item.label}
           </a>
         ))}
         {showRegistrationButton ? (
-          <Link className="header-cta" href={registrationPath(locale ?? "pt")} onClick={closeMenu}>
+          <a className="header-cta" href={hotmartCheckoutUrl()} onClick={closeMenu}>
             <ArrowIcon />
             <span>{labels.registration}</span>
-          </Link>
+          </a>
         ) : null}
         {locale ? (
           <div className="mobile-menu-language" aria-label={labels.language}>

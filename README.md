@@ -5,3 +5,15 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/andresilveriodev/congresso-paternidade-de-deus.git
 git push -u origin main
+
+## Fluxo de inscrição
+
+Os botões de inscrição usam `NEXT_PUBLIC_HOTMART_CHECKOUT_URL` para abrir o checkout da Hotmart.
+
+No painel da Hotmart, configure a página de redirecionamento após a compra aprovada para:
+
+```text
+https://SEU-DOMINIO.com/pt/inscricao
+```
+
+Após o participante enviar o formulário, a confirmação aparece por 6 segundos e o site volta automaticamente para a página inicial.

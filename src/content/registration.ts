@@ -1,4 +1,5 @@
 import type { RegistrationCopy } from "@/types/inscricao";
+import type { Locale } from "@/types/locale";
 
 const cargoOptions = [
   "Bispo",
@@ -23,7 +24,8 @@ const areaAtuacaoOptions = [
   "Pastoral",
   "Direito Canônico",
   "Filosofia",
-  "Ciências da Religião"
+  "Ciências da Religião",
+  "Outra"
 ];
 
 const modalidadeParticipacaoOptions = [
@@ -46,12 +48,12 @@ const preferredLanguageOptions = ["Português", "Espanhol", "Inglês", "Italiano
 const sexoOptions = ["Masculino", "Feminino"];
 const estadoCivilOptions = ["Solteiro(a)", "Casado(a)", "Religioso(a)", "Sacerdote", "Bispo", "Outro"];
 
-export const registrationContent: Record<"pt" | "en" | "it", RegistrationCopy> = {
+export const registrationContent: Record<Locale, RegistrationCopy> = {
   pt: {
-    languageLabels: { en: "Inglês", pt: "Português", it: "Italiano" },
+    languageLabels: { en: "Inglês", es: "Espanhol", pt: "Português", it: "Italiano" },
     required: "Obrigatório",
     submitting: "Enviando...",
-    submit: "Continuar para o pagamento",
+    submit: "Enviar informações",
     remove: "Remover",
     fileButton: "Anexar arquivo PDF",
     hero: [
@@ -125,10 +127,10 @@ export const registrationContent: Record<"pt" | "en" | "it", RegistrationCopy> =
     preferredLanguageOptions
   },
   en: {
-    languageLabels: { en: "English", pt: "Portuguese", it: "Italian" },
+    languageLabels: { en: "English", es: "Spanish", pt: "Portuguese", it: "Italian" },
     required: "Required",
     submitting: "Sending...",
-    submit: "Register",
+    submit: "Send information",
     remove: "Remove",
     fileButton: "Attach PDF file",
     hero: [
@@ -195,16 +197,93 @@ export const registrationContent: Record<"pt" | "en" | "it", RegistrationCopy> =
     sexoOptions: ["Male", "Female"],
     estadoCivilOptions: ["Single", "Married", "Religious", "Priest", "Bishop", "Other"],
     cargoOptions: ["Bishop", "Priest", "Deacon", "Religious", "Seminarian", "Layperson", "Professor", "Researcher", "Student", "Other"],
-    areaAtuacaoOptions: ["Systematic Theology", "Biblical Theology", "Moral Theology", "Spirituality", "Liturgy", "Catechesis", "Pastoral Ministry", "Canon Law", "Philosophy", "Religious Studies"],
+    areaAtuacaoOptions: ["Systematic Theology", "Biblical Theology", "Moral Theology", "Spirituality", "Liturgy", "Catechesis", "Pastoral Ministry", "Canon Law", "Philosophy", "Religious Studies", "Other"],
     modalidadeParticipacaoOptions: ["Participant", "Participant with certificate", "Academic Paper Presentation", "Invited Speaker"],
     specialNeedsOptions: ["Physical accessibility", "Sign Language Interpreter (Libras)", "Simultaneous translation", "Special dietary needs", "Other"],
     preferredLanguageOptions: ["Portuguese", "Spanish", "English", "Italian", "French"]
   },
+  es: {
+    languageLabels: { en: "Inglés", es: "Español", pt: "Portugués", it: "Italiano" },
+    required: "Obligatorio",
+    submitting: "Enviando...",
+    submit: "Enviar información",
+    remove: "Eliminar",
+    fileButton: "Adjuntar archivo PDF",
+    hero: [
+      "I Congreso Internacional de Teología",
+      "Sobre la Paternidad de Dios",
+      "Entre Dogma y Devoción",
+      "Recibieron un Espíritu de hijos adoptivos, por el cual clamamos: ¡Abbá, Padre!",
+      "(Gál 4,6)"
+    ],
+    fields: {
+      personal: "1. Datos personales",
+      fullName: "Nombre completo:",
+      badgeName: "Nombre para la credencial:",
+      birthDate: "Fecha de nacimiento:",
+      cpf: "CPF:",
+      passport: "Pasaporte (extranjeros):",
+      nationality: "Nacionalidad:",
+      gender: "Sexo:",
+      marital: "Estado civil:",
+      contact: "2. Contacto",
+      phone: "Teléfono/WhatsApp:",
+      email: "Correo electrónico:",
+      address: "Dirección:",
+      city: "Ciudad:",
+      state: "Estado/Provincia:",
+      country: "País:",
+      postal: "Código postal:",
+      affiliation: "3. Vínculo eclesial / académico",
+      role: "Cargo/Función:",
+      field: "Área de actuación:",
+      other: "¿Cuál otra?",
+      participation: "4. Modalidad de participación",
+      academic: "5. Inscripción de trabajos académicos",
+      paperQuestion: "¿Presentará un trabajo académico?",
+      paperTitle: "Título del trabajo:",
+      thematicArea: "Área temática:",
+      needs: "6. Necesidades especiales",
+      hasNeeds: "¿Tiene alguna necesidad específica?",
+      which: "¿Cuál?",
+      requires: "Necesita:",
+      lodging: "7. Alojamiento y logística",
+      lodgingQuestion: "¿Necesita información sobre alojamiento?",
+      arrival: "Fecha prevista de llegada:",
+      departure: "Fecha prevista de salida:",
+      cultural: "¿Participará en los eventos culturales y visitas guiadas?",
+      language: "8. Idioma preferido",
+      certification: "9. Certificación",
+      wantsCertificate: "¿Desea certificado?",
+      certificateName: "Nombre exactamente como debe constar en el certificado:",
+      image: "10. Autorización de uso de imagen",
+      imageText:
+        "Autorizo el uso de mi imagen, voz y participación en fotografías, grabaciones y transmisiones realizadas durante el I Congreso Internacional de Teología sobre la Paternidad de Dios, para fines institucionales, académicos, evangelizadores y promocionales, sin costo para la organización.",
+      commitment: "11. Declaración de compromiso",
+      commitmentText:
+        "Declaro que la información proporcionada es verdadera y que conozco las normas de participación del Congreso.",
+      commitmentCity: "Ciudad:",
+      commitmentDate: "Fecha:",
+      signature: "Firma:",
+      termsAcceptancePrefix: "He leído y acepto los",
+      termsAcceptanceLink: "Términos de Uso",
+      termsAcceptanceSuffix: " para continuar la inscripción.",
+      termsAcceptanceError: "Acepte los Términos de Uso para continuar."
+    },
+    yesNo: ["Sí", "No"],
+    sexoOptions: ["Masculino", "Femenino"],
+    estadoCivilOptions: ["Soltero(a)", "Casado(a)", "Religioso(a)", "Sacerdote", "Obispo", "Otro"],
+    cargoOptions: ["Obispo", "Sacerdote", "Diácono", "Religioso(a)", "Seminarista", "Laico(a)", "Profesor(a)", "Investigador(a)", "Estudiante", "Otro"],
+    areaAtuacaoOptions: ["Teología Sistemática", "Teología Bíblica", "Teología Moral", "Espiritualidad", "Liturgia", "Catequesis", "Pastoral", "Derecho Canónico", "Filosofía", "Ciencias de la Religión", "Otra"],
+    modalidadeParticipacaoOptions: ["Participante", "Participante con certificado", "Presentación de comunicación científica", "Conferencista invitado"],
+    specialNeedsOptions: ["Accesibilidad física", "Intérprete de lengua de señas", "Traducción simultánea", "Alimentación especial", "Otro"],
+    preferredLanguageOptions: ["Portugués", "Español", "Inglés", "Italiano", "Francés"]
+  },
   it: {
-    languageLabels: { en: "Inglese", pt: "Portoghese", it: "Italiano" },
+    languageLabels: { en: "Inglese", es: "Spagnolo", pt: "Portoghese", it: "Italiano" },
     required: "Obbligatorio",
     submitting: "Invio...",
-    submit: "Iscrizione",
+    submit: "Invia informazioni",
     remove: "Rimuovere",
     fileButton: "Allega file PDF",
     hero: [
@@ -271,7 +350,7 @@ export const registrationContent: Record<"pt" | "en" | "it", RegistrationCopy> =
     sexoOptions: ["Maschio", "Femmina"],
     estadoCivilOptions: ["Celibe/Nubile", "Coniugato/a", "Religioso/a", "Sacerdote", "Vescovo", "Altro"],
     cargoOptions: ["Vescovo", "Sacerdote", "Diacono", "Religioso", "Seminarista", "Laico", "Professore", "Ricercatore", "Studente", "Altro"],
-    areaAtuacaoOptions: ["Teologia sistematica", "Teologia biblica", "Teologia morale", "Spiritualità", "Liturgia", "Catechesi", "Pastorale", "Diritto canonico", "Filosofia", "Studi religiosi"],
+    areaAtuacaoOptions: ["Teologia sistematica", "Teologia biblica", "Teologia morale", "Spiritualità", "Liturgia", "Catechesi", "Pastorale", "Diritto canonico", "Filosofia", "Studi religiosi", "Altro"],
     modalidadeParticipacaoOptions: ["Partecipante", "Partecipante con attestato", "Presentazione di comunicazione scientifica", "Relatore invitato"],
     specialNeedsOptions: ["Accessibilità fisica", "Interprete di lingua dei segni", "Traduzione simultanea", "Pasti speciali", "Altro"],
     preferredLanguageOptions: ["Portoghese", "Spagnolo", "Inglese", "Italiano", "Francese"]

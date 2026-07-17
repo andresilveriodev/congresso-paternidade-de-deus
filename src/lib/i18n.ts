@@ -1,8 +1,9 @@
-export type Locale = "pt" | "en" | "it";
+export type Locale = "pt" | "en" | "es" | "it";
 
 export const localeNames: Record<Locale, string> = {
   pt: "Português",
   en: "English",
+  es: "Español",
   it: "Italiano"
 };
 
@@ -66,6 +67,31 @@ export const locales: Record<Locale, {
     intro:
       "An international experience of theology, liturgy, popular devotion and evangelizing mission."
   },
+  es: {
+    nav: ["Programa", "Misterio", "Formación", "Conferencistas", "Lugar", "Reglamento"],
+    labels: {
+      language: "Idioma",
+      more: "Más información",
+      registration: "Inscripción",
+      schedule: "Programa",
+      mystery: "Presentación",
+      formation: "Investigación teológica y formación eclesial",
+      speakers: "Conferencistas",
+      general: "Información general",
+      location: "Lugar del evento",
+      indications: "Recomendaciones",
+      papers: "Trabajos científicos",
+      rules: "Reglamento",
+      registerNow: "Inscríbete",
+      close: "Cerrar"
+    },
+    hero: {
+      title: "Paternidad de Dios",
+      subtitle: "Un camino de fe en el corazón de la devoción al Padre Eterno",
+      cta: "Inscripción"
+    },
+    intro: "Una experiencia internacional de teología, liturgia, piedad popular y misión evangelizadora."
+  },
   it: {
     nav: ["Programma", "Mistero", "Formazione", "Relatori", "Luogo", "Regolamento"],
     labels: {
@@ -98,7 +124,7 @@ export const locales: Record<Locale, {
 export function getInitialLocale(): Locale {
   if (typeof window === "undefined") return "pt";
   const stored = window.localStorage.getItem("paternidade-locale");
-  return stored === "en" || stored === "it" || stored === "pt" ? stored : "pt";
+  return stored === "en" || stored === "es" || stored === "it" || stored === "pt" ? stored : "pt";
 }
 
 export function saveLocale(locale: Locale) {
@@ -109,7 +135,7 @@ export function saveLocale(locale: Locale) {
 /*
   Como adicionar ou alterar textos:
   1. Edite este arquivo e atualize o objeto `locales`.
-  2. Cada idioma deve ter a mesma chave: pt, en, it ou um novo código, por exemplo "es".
+  2. Cada idioma deve ter a mesma chave: pt, en, es, it ou um novo código.
   3. Para adicionar outro idioma no futuro, inclua o código no tipo Locale, em localeNames
      e copie a mesma estrutura de labels/hero/intro. Os componentes já leem tudo por chave.
 */

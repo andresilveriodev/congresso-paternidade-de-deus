@@ -30,6 +30,29 @@ type RegistrationPageProps = {
   locale: Locale;
 };
 
+const successMessages: Record<Locale, { title: string; description: string; countdown: (seconds: number) => string }> = {
+  pt: {
+    title: "Cadastro realizado com sucesso!",
+    description: "As informações da sua inscrição foram enviadas para o seu e-mail.",
+    countdown: (seconds) => `Você será redirecionado para a página inicial em ${seconds} segundos.`
+  },
+  en: {
+    title: "Registration completed successfully!",
+    description: "Your registration information has been sent to your email address.",
+    countdown: (seconds) => `You will be redirected to the home page in ${seconds} seconds.`
+  },
+  es: {
+    title: "¡Inscripción completada con éxito!",
+    description: "La información de tu inscripción fue enviada a tu correo electrónico.",
+    countdown: (seconds) => `Serás redirigido a la página de inicio en ${seconds} segundos.`
+  },
+  it: {
+    title: "Registrazione completata con successo!",
+    description: "Le informazioni sulla registrazione sono state inviate al tuo indirizzo e-mail.",
+    countdown: (seconds) => `Sarai reindirizzato alla pagina iniziale tra ${seconds} secondi.`
+  }
+};
+
 const requiredProgressFields: Array<keyof InscricaoFormData> = [
   "nome",
   "nomeCredencial",
@@ -70,6 +93,13 @@ function hasProgressValue(value: unknown) {
 
 function isAffirmativeProgressValue(value: unknown) {
   return typeof value === "string" && (value.trim().toLowerCase().startsWith("s") || value.trim().toLowerCase() === "yes");
+}
+
+function isOtherAreaValue(value: unknown) {
+  if (typeof value !== "string") return false;
+
+  const normalized = value.trim().toLowerCase();
+  return normalized === "outra" || normalized === "otra" || normalized === "other" || normalized === "altro";
 }
 
 function hasStartedRegistration(values: Partial<InscricaoFormData>, hasUploads: boolean) {
@@ -116,11 +146,14 @@ function getRegistrationProgress(values: Partial<InscricaoFormData>) {
 
 export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps) {
   const legalPages = getLegalPages(locale);
+  const successMessage = successMessages[locale];
   const [termsDrawerOpen, setTermsDrawerOpen] = useState(false);
   const [uploads, setUploads] = useState<UploadItem[]>([]);
   const [dragging, setDragging] = useState(false);
   const [status, setStatus] = useState<string>("");
   const [uploadError, setUploadError] = useState<string>("");
+  const [registrationComplete, setRegistrationComplete] = useState(false);
+  const [redirectSeconds, setRedirectSeconds] = useState(6);
   const {
     clearErrors,
     control,
@@ -139,12 +172,37 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
   const necessidade = useWatch({ control, name: "necessidadeEspecifica" });
   const certificacao = useWatch({ control, name: "certificacaoDeseja" });
   const apresentaraTrabalho = useWatch({ control, name: "apresentaraTrabalho" });
+  const areaAtuacao = useWatch({ control, name: "areaAtuacao" });
   const requiresDescription = Boolean(necessidade?.toLowerCase().startsWith("s"));
-  const requiresCertificateName = Boolean(certificacao?.toLowerCase().startsWith("s"));
+  const requiresCertificateName = isAffirmativeProgressValue(certificacao);
   const willPresentPaper = isAffirmativeProgressValue(apresentaraTrabalho);
+  const showOtherAreaField = isOtherAreaValue(areaAtuacao);
   const hasUploads = uploads.length > 0;
   const hasProgressStarted = hasStartedRegistration(formValues, hasUploads);
   const registrationProgress = getRegistrationProgress(formValues);
+
+  useEffect(() => {
+    if (!registrationComplete) return;
+
+    const redirectTimer = window.setTimeout(() => {
+      window.location.assign(`/${locale}`);
+    }, 6000);
+    const countdownTimer = window.setInterval(() => {
+      setRedirectSeconds((current) => Math.max(0, current - 1));
+    }, 1000);
+
+    return () => {
+      window.clearTimeout(redirectTimer);
+      window.clearInterval(countdownTimer);
+    };
+  }, [locale, registrationComplete]);
+
+  useEffect(() => {
+    if (!showOtherAreaField) {
+      clearErrors("areaOutraQual");
+      setValue("areaOutraQual", "");
+    }
+  }, [clearErrors, setValue, showOtherAreaField]);
 
   useEffect(() => {
     if (!requiresCertificateName) {
@@ -242,7 +300,7 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
     }
 
     if (result.success) {
-      window.location.assign(result.data.redirectUrl);
+      setRegistrationComplete(true);
       return;
     }
 
@@ -314,7 +372,7 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
           <input type="hidden" value={locale} {...register("locale")} />
           <DadosPessoaisFields copy={copy} errors={errors} register={register} />
           <ContatosFields copy={copy} errors={errors} register={register} />
-          <VinculoFields copy={copy} errors={errors} register={register} />
+          <VinculoFields copy={copy} errors={errors} register={register} showOtherAreaField={showOtherAreaField} />
           <ModalidadeFields copy={copy} errors={errors} register={register} />
           <TrabalhoAcademicoFields
             copy={copy}
@@ -369,6 +427,25 @@ export function RegistrationPage({ copy, labels, locale }: RegistrationPageProps
           ))}
         </div>
       </Drawer>
+      {registrationComplete ? (
+        <div className="registration-success-backdrop" role="presentation">
+          <section
+            aria-describedby="registration-success-description"
+            aria-labelledby="registration-success-title"
+            aria-live="assertive"
+            aria-modal="true"
+            className="registration-success-modal"
+            role="dialog"
+          >
+            <span aria-hidden="true" className="registration-success-icon">✓</span>
+            <h2 id="registration-success-title">{successMessage.title}</h2>
+            <p id="registration-success-description">{successMessage.description}</p>
+            <p className="registration-success-countdown">
+              {successMessage.countdown(redirectSeconds)}
+            </p>
+          </section>
+        </div>
+      ) : null}
     </>
   );
 }

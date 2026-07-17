@@ -19,7 +19,7 @@ const acceptedTerms = z
 
 export const inscricaoSchema = z
   .object({
-    locale: z.enum(["pt", "en", "it"]).default("pt"),
+    locale: z.enum(["pt", "en", "es", "it"]).default("pt"),
     nome: required("Nome completo").max(160),
     nomeCredencial: required("Nome para credencial").max(80),
     dataNascimento: required("Data de nascimento"),

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { apiError, apiSuccess } from "@/lib/api/responses";
+import { homePath } from "@/lib/constants/routes";
 import { sanitizePayload } from "@/lib/utils/sanitize";
 import { inscricaoSchema, zodIssuesToFieldErrors } from "@/lib/validations/inscricao.schema";
 import type { InscricaoCreationResult, InscricaoFormData } from "@/types/inscricao";
@@ -111,10 +112,10 @@ export async function POST(request: Request) {
 
     await sendBrevoEmail(data, attachments);
 
-    return apiSuccess<InscricaoCreationResult>("Inscricao enviada com sucesso. Redirecionando para o checkout.", {
+    return apiSuccess<InscricaoCreationResult>("Cadastro realizado com sucesso.", {
       inscricaoId: createInscricaoId(),
-      status: "aguardando_pagamento",
-      redirectUrl: buildHotmartCheckoutUrl(data)
+      status: "confirmada",
+      redirectUrl: homePath(data.locale)
     });
   } catch (error) {
     console.error("Erro ao enviar inscricao pela Brevo:", error);
@@ -202,6 +203,10 @@ async function sendBrevoEmail(payload: InscricaoFormData, attachments: BrevoAtta
   }
 
   const bccRecipients = [
+    {
+      email: destinationEmail,
+      name: "Equipe de Inscrições"
+    },
     ...(copyEmail
       ? [
           {
@@ -227,8 +232,8 @@ async function sendBrevoEmail(payload: InscricaoFormData, attachments: BrevoAtta
     },
     to: [
       {
-        email: destinationEmail,
-        name: "Equipe de Inscrições"
+        email: payload.emailContato,
+        name: payload.nome
       }
     ],
     ...(bccRecipients.length > 0
@@ -237,10 +242,10 @@ async function sendBrevoEmail(payload: InscricaoFormData, attachments: BrevoAtta
         }
       : {}),
     replyTo: {
-      email: payload.emailContato,
-      name: payload.nome
+      email: destinationEmail,
+      name: "Equipe de Inscrições"
     },
-    subject: `Nova inscricao - ${payload.nome}`,
+    subject: `Inscrição realizada - ${payload.nome}`,
     htmlContent: buildEmailHtml(payload, attachments),
     ...(attachments.length > 0
       ? {
@@ -318,7 +323,7 @@ function buildEmailHtml(payload: InscricaoFormData, attachments: BrevoAttachment
               Congresso Pai Eterno
             </p>
             <h1 style="margin:0 0 24px;color:#2d1b0d;font-size:26px;line-height:1.2;">
-              Nova inscricao recebida: ${escapeHtml(payload.nome)}
+              Inscrição realizada com sucesso: ${escapeHtml(payload.nome)}
             </h1>
             ${sectionsHtml}
             ${attachmentsHtml}
@@ -344,46 +349,6 @@ function buildEmailRow(label: string, value: string) {
       </td>
     </tr>
   `;
-}
-
-function buildHotmartCheckoutUrl(payload: InscricaoFormData) {
-  const checkout = new URL(process.env.HOTMART_CHECKOUT_URL ?? "https://pay.hotmart.com/J106565086L?checkoutMode=10");
-
-  checkout.searchParams.set("checkoutMode", checkout.searchParams.get("checkoutMode") ?? "10");
-  addSearchParam(checkout, "name", payload.nome);
-  addSearchParam(checkout, "email", payload.emailContato);
-
-  const phone = splitPhone(payload.telefoneWhatsapp);
-  addSearchParam(checkout, "phoneac", phone.phoneac);
-  addSearchParam(checkout, "phonenumber", phone.phonenumber);
-
-  return checkout.toString();
-}
-
-function splitPhone(phoneValue: string) {
-  let digits = phoneValue.replace(/\D/g, "");
-
-  if (digits.startsWith("55") && digits.length > 11) {
-    digits = digits.slice(2);
-  }
-
-  if (digits.length >= 10) {
-    return {
-      phoneac: digits.slice(0, 2),
-      phonenumber: digits.slice(2)
-    };
-  }
-
-  return {
-    phoneac: "",
-    phonenumber: digits
-  };
-}
-
-function addSearchParam(url: URL, key: string, value: string) {
-  if (value.trim()) {
-    url.searchParams.set(key, value.trim());
-  }
 }
 
 function getPayloadValue(value: unknown) {

@@ -86,7 +86,6 @@ export function HomePage({ home, labels, locale }: HomePageProps) {
         <HeroSection
           background={images.hero}
           cta={home.register}
-          locale={locale}
           logo={images.markGold}
           subtitle={home.hero}
           title={labels.registration}
@@ -149,7 +148,6 @@ export function HomePage({ home, labels, locale }: HomePageProps) {
         />
         <InscricaoCTASection
           cta={labels.registerNow}
-          locale={locale}
           text={home.registerBand}
           title={labels.registration}
         />

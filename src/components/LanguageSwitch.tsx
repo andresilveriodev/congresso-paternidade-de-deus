@@ -1,6 +1,7 @@
 "use client";
 
 import { Locale, localeNames } from "@/lib/i18n";
+import { supportedLocales } from "@/types/locale";
 
 type Props = {
   locale: Locale;
@@ -9,7 +10,8 @@ type Props = {
 };
 
 export function LanguageSwitch({ locale, onChange, label }: Props) {
-  const nextLocale = locale === "pt" ? "en" : locale === "en" ? "it" : "pt";
+  const currentIndex = supportedLocales.indexOf(locale);
+  const nextLocale = supportedLocales[(currentIndex + 1) % supportedLocales.length];
 
   return (
     <div className="language-switch" aria-label={label}>
@@ -18,7 +20,7 @@ export function LanguageSwitch({ locale, onChange, label }: Props) {
         <strong>{localeNames[locale]}</strong>
       </button>
       <div className="language-options">
-        {(["pt", "en", "it"] as Locale[]).map((item) => (
+        {supportedLocales.map((item) => (
           <button
             aria-pressed={locale === item}
             key={item}

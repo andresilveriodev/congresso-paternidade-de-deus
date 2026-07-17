@@ -18,7 +18,7 @@ export function ProgramacaoSection({ days, schedule, subtitle, title }: Programa
           <p>{subtitle}</p>
         </div>
       </div>
-      <ProgramacaoTabs days={days} schedule={schedule} />
+      <ProgramacaoTabs ariaLabel={title} days={days} schedule={schedule} />
     </section>
   );
 }

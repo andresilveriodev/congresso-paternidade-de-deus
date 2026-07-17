@@ -9,12 +9,14 @@ export const defaultLocale: Locale = "pt";
 export const localeNames: Record<Locale, string> = {
   pt: "Português",
   en: "English",
+  es: "Español",
   it: "Italiano"
 };
 
 export const htmlLang: Record<Locale, string> = {
   pt: "pt-BR",
   en: "en",
+  es: "es",
   it: "it"
 };
 

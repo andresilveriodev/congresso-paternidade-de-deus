@@ -2686,6 +2686,82 @@ img {
   font-weight: 800;
 }
 
+.registration-success-backdrop {
+  align-items: center;
+  background: rgba(2, 30, 48, 0.72);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 24px;
+  position: fixed;
+  z-index: 1000;
+}
+
+.registration-success-modal {
+  animation: successModalIn 320ms ease-out both;
+  background: var(--white);
+  border: 1px solid rgba(204, 163, 98, 0.55);
+  border-radius: 18px;
+  box-shadow: 0 24px 70px rgba(2, 30, 48, 0.28);
+  color: var(--navy);
+  max-width: 520px;
+  padding: clamp(30px, 6vw, 52px);
+  text-align: center;
+  width: 100%;
+}
+
+.registration-success-icon {
+  align-items: center;
+  background: var(--gold);
+  border-radius: 50%;
+  color: var(--navy);
+  display: inline-flex;
+  font-size: 34px;
+  font-weight: 900;
+  height: 72px;
+  justify-content: center;
+  margin-bottom: 24px;
+  width: 72px;
+}
+
+.registration-success-modal h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(30px, 5vw, 44px);
+  font-weight: 400;
+  line-height: 1.08;
+  margin: 0 0 18px;
+}
+
+.registration-success-modal p {
+  font-size: 17px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.registration-success-modal .registration-success-countdown {
+  color: rgba(2, 30, 48, 0.68);
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+@keyframes successModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .registration-success-modal {
+    animation: none;
+  }
+}
+
 @keyframes slideUp {
   from {
     opacity: 0;

@@ -21,7 +21,7 @@ export function CertificacaoFields({
       <p className="field-question">{fields.wantsCertificate}</p>
       <RadioGroup error={errors.certificacaoDeseja?.message} label="" name="certificacaoDeseja" options={copy.yesNo} register={register("certificacaoDeseja", { required: copy.required })} />
       {requiresCertificateName ? (
-        <InlineLineField error={errors.nomeCertificado?.message} label={fields.certificateName} register={register("nomeCertificado", { required: copy.required })} />
+        <InlineLineField error={errors.nomeCertificado?.message} label={fields.certificateName} register={register("nomeCertificado")} />
       ) : null}
     </FormSection>
   );

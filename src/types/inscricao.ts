@@ -1,5 +1,6 @@
 import type { z } from "zod";
 import type { inscricaoSchema } from "@/lib/validations/inscricao.schema";
+import type { Locale } from "@/types/locale";
 
 export type InscricaoFormData = z.infer<typeof inscricaoSchema>;
 
@@ -12,7 +13,7 @@ export type InscricaoCreationResult = {
 };
 
 export type RegistrationCopy = {
-  languageLabels: Record<"en" | "pt" | "it", string>;
+  languageLabels: Record<Locale, string>;
   required: string;
   submitting: string;
   submit: string;

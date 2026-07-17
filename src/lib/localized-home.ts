@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { Locale } from "@/types/locale";
 import {
   formationTabs,
   mysteryTabs,
@@ -14,7 +15,7 @@ type RecommendationItem = { name: string; image: string; text: string };
 type RecommendationGroups = Record<string, RecommendationItem[]>;
 
 export type HomeCopy = {
-  languages: { en: string; pt: string; it: string };
+  languages: Record<Locale, string>;
   hero: ReactNode;
   register: string;
   scheduleSubtitle: string;
@@ -193,9 +194,9 @@ const italianFormationTabs: typeof formationTabs = [
   }
 ];
 
-export const homeCopy: Record<"pt" | "en" | "it", HomeCopy> = {
+const baseHomeCopy = {
   pt: {
-    languages: { en: "Inglês", pt: "Português", it: "Italiano" },
+    languages: { en: "Inglês", es: "Espanhol", pt: "Português", it: "Italiano" },
     hero: "Uma jornada de fé no coração da devoção ao Pai Eterno",
     register: "Fazer Inscrição",
     scheduleSubtitle: "5 Dias de imersão teológica",
@@ -250,7 +251,7 @@ export const homeCopy: Record<"pt" | "en" | "it", HomeCopy> = {
     footer: "Todos direitos reservado Paternidade de Deus @2026"
   },
   en: {
-    languages: { en: "English", pt: "Portuguese", it: "Italian" },
+    languages: { en: "English", es: "Spanish", pt: "Portuguese", it: "Italian" },
     hero: "A journey of faith at the heart of devotion to the Eternal Father",
     register: "Register",
     scheduleSubtitle: "5 Days of theological immersion",
@@ -394,7 +395,7 @@ export const homeCopy: Record<"pt" | "en" | "it", HomeCopy> = {
     footer: "All rights reserved - Fatherhood of God @2026"
   },
   it: {
-    languages: { en: "Inglese", pt: "Portoghese", it: "Italiano" },
+    languages: { en: "Inglese", es: "Spagnolo", pt: "Portoghese", it: "Italiano" },
     hero: "Un cammino di fede nel cuore della devozione al Padre Eterno",
     register: "Iscriviti",
     scheduleSubtitle: "5 giorni di immersione teologica",
@@ -588,4 +589,153 @@ export const homeCopy: Record<"pt" | "en" | "it", HomeCopy> = {
       "Partecipa a questo incontro internazionale di fede, teologia e devozione presso la Basilica Santuario del Divino Padre Eterno, a Trindade-GO.",
     footer: "Tutti i diritti riservati. Paternità di Dio @2026"
   }
+} satisfies Record<"pt" | "en" | "it", HomeCopy>;
+
+const spanishSchedule: ScheduleDay[] = [
+  { day: "Lunes", items: [["14:00", "Acreditación — Cineteatro P. Jesus Flores"], ["20:00", "Presentaciones culturales en la plaza del Santuario"]] },
+  {
+    day: "Martes",
+    items: [
+      ["8:30", "Ceremonia de apertura"],
+      ["9:30", "Conferencia inaugural — El Padre revelado por Jesucristo: fundamentos cristológicos — Cardenal José Tolentino de Mendonça"],
+      ["14:30", "Mesa redonda: La revelación del Padre en el Antiguo Testamento — P. João Paulo Santos, CSsR"],
+      ["15:15", "La teología patrística de la Paternidad divina — Cardenal Berhaneyesus Souraphiel"],
+      ["16:00", "Debate"], ["17:00", "Refrigerio"], ["17:15", "Comunicaciones científicas"],
+      ["19:00", "Misa en el Santuario Basílica — presidida por el Cardenal José Tolentino de Mendonça"],
+      ["20:00", "Presentación cultural en la plaza del Santuario"]
+    ]
+  },
+  {
+    day: "Miércoles",
+    items: [
+      ["8:30", "Oración"],
+      ["9:00", "Conferencia — La Paternidad en el misterio trinitario: generación eterna y comunión — Prof.ª Maria Clara Lucchetti Bingemer"],
+      ["10:30", "Refrigerio"], ["11:00", "Debate"],
+      ["14:30", "Santo Tomás de Aquino: la paternidad en la Suma Teológica — P. Elílio de Faria Matos Júnior"],
+      ["15:15", "La Paternidad de Dios en el Magisterio del Papa Francisco — Mons. Ricardo Hoepers"],
+      ["16:00", "Debate"], ["17:00", "Refrigerio"], ["17:15", "Comunicaciones científicas"],
+      ["19:00", "Misa en el Santuario Matriz — Cardenal Óscar Rodríguez Maradiaga"],
+      ["20:00", "Presentación cultural en la plaza del Santuario"]
+    ]
+  },
+  {
+    day: "Jueves",
+    items: [
+      ["8:30", "Oración"],
+      ["9:00", "Conferencia — El Padre en la liturgia eucarística y en la oración de la Iglesia — Cardenal Óscar Rodríguez Maradiaga"],
+      ["10:30", "Refrigerio"], ["11:00", "Debate"],
+      ["14:30", "Piedad popular e inculturación de la fe — Dr. Bryan Thatcher"],
+      ["15:15", "El Santuario del Divino Padre Eterno como locus theologicus — Mons. João Justino de Medeiros Silva"],
+      ["16:00", "Debate"], ["17:00", "Refrigerio"], ["17:15", "Comunicaciones científicas"],
+      ["19:00", "Misa en el Santuario Basílica — presidida por Mons. Danival Milagres Coelho"],
+      ["20:00", "Presentación cultural en la plaza del Santuario"]
+    ]
+  },
+  {
+    day: "Viernes",
+    items: [
+      ["6:55", "Misa en el Santuario Basílica — Mons. João Justino de Medeiros Silva"],
+      ["9:00", "Conferencia — La iconografía del Padre en la tradición cristiana — Fray Sidney Damasio Machado"],
+      ["10:30", "Refrigerio"], ["11:00", "Carta de Trindade sobre la Paternidad de Dios"],
+      ["12:00", "Clausura"], ["14:30", "Visita guiada al Santuario y a las obras"]
+    ]
+  }
+];
+
+const spanishMysteryTabs: typeof mysteryTabs = [
+  {
+    ...mysteryTabs[0],
+    title: "Presentación",
+    summary: "El Santuario Basílica del Divino Padre Eterno acoge el I Congreso Internacional de Teología sobre la Paternidad de Dios.",
+    detail: "El Santuario Basílica del Divino Padre Eterno, en Trindade (Goiás, Brasil), es una expresión elocuente de la piedad popular brasileña y un patrimonio espiritual de la Iglesia en Brasil. Este lugar sagrado recibe cada año a millones de fieles que manifiestan su fe y experimentan la ternura del Padre.\n\nFiel a su misión evangelizadora, el Santuario promoverá, del <span>9 al 13 de noviembre de 2026, el I Congreso Internacional de Teología sobre la Paternidad de Dios,</span> reuniendo a teólogos, biblistas, liturgistas, agentes pastorales y fieles laicos."
+  },
+  {
+    ...mysteryTabs[1],
+    title: "Fundamentación teológica y eclesial",
+    summary: "El Congreso nace de la experiencia de fe vivida en el Santuario y reconoce la piedad popular como lugar privilegiado de encuentro con Dios Padre.",
+    detail: "<span>1. El Santuario como locus theologicus de la experiencia del Padre</span>\n\nLa fe del pueblo expresa y profundiza la experiencia de la Paternidad divina.\n\n<span>2. Renovación cristocéntrica y trinitaria de la fe</span>\n\nEl evento vuelve a situar en el centro de la reflexión teológica y pastoral la experiencia de Dios como Padre.\n\n<span>3. Respuesta a la crisis contemporánea de la paternidad</span>\n\nLa Paternidad divina ofrece un horizonte de sentido, reconciliación y fraternidad universal.\n\n<span>4. Integración entre fe y vida</span>\n\nEl Congreso une rigor científico, celebración litúrgica, expresión devocional y conversión pastoral."
+  }
+];
+
+const spanishFormationTabs: typeof formationTabs = [
+  { ...formationTabs[0], title: "Objetivo general", text: "Promover la reflexión y la producción teológica sobre la Paternidad de Dios, articulando la Sagrada Escritura, la Tradición, la Teología Sistemática, la Liturgia, la Antropología Teológica y la Teología Pastoral." },
+  { ...formationTabs[1], title: "Objetivos específicos", text: "Profundizar el misterio de la Paternidad de Dios en la Trinidad; investigar su revelación bíblica; dialogar con la teología contemporánea; valorar la piedad popular y fomentar una red internacional de investigación.", detail: "Profundizar el misterio de la Paternidad de Dios en la Trinidad;\nInvestigar la revelación bíblica de la paternidad divina;\nRevisar la herencia patrística, medieval y moderna;\nDialogar con la teología contemporánea;\nValorar la piedad popular como expresión del sensus fidei;\nFomentar la investigación y una red internacional sobre la Paternidad de Dios." },
+  { ...formationTabs[2], title: "Promoción y respaldo institucional", text: "El I Congreso Internacional de Teología sobre la Paternidad de Dios es promovido por el Santuario Basílica del Divino Padre Eterno mediante su Comisión Organizadora.", detail: "El Congreso cuenta con el respaldo de la Arquidiócesis de Goiânia, la Congregación del Santísimo Redentor — Provincia de Brasilia, la CNBB, la Pontificia Universidad Lateranense, la Pontificia Universidad Católica de Goiás y el IFITEG." },
+  { ...formationTabs[3], title: "Resultados esperados", text: "Publicación de actas, elaboración de recursos pastorales, creación de una red internacional de investigación y fortalecimiento del diálogo entre teología académica y piedad popular." },
+  { ...formationTabs[4], title: "Perspectiva académica y metodológica", text: "El Congreso relaciona los 186 años de devoción al Divino Padre Eterno en Trindade con la investigación teológica internacional.", detail: "El programa recorre los fundamentos bíblicos y patrísticos de la revelación del Padre, los desarrollos conciliares y magisteriales, las síntesis teológicas clásicas y contemporáneas y las expresiones litúrgicas y devocionales. Está destinado a obispos, sacerdotes, diáconos, religiosos, docentes, investigadores, estudiantes, agentes pastorales y devotos." }
+];
+
+const spanishSpeakers: typeof speakers = speakers.map((speaker, index) => ({
+  ...speaker,
+  ...[
+    { name: "Cardenal José Tolentino de Mendonça", role: "Vaticano", bio: "Prefecto del Dicasterio para la Cultura y la Educación del Vaticano, maestro en Ciencias Bíblicas y doctor en Teología Bíblica." },
+    { name: "Prof.ª Maria Clara Lucchetti Bingemer", role: "PUC-Rio", bio: "Graduada en Comunicación Social y Teología, maestra en Teología y doctora en Teología Sistemática." },
+    { name: "Cardenal Óscar Rodríguez Maradiaga", role: "Honduras", bio: "Arzobispo emérito de Tegucigalpa, doctor en Filosofía, Teología y Teología Moral." },
+    { name: "Mons. João Justino de Medeiros Silva", role: "Arzobispo de Goiânia", bio: "Arzobispo de Goiânia y primer vicepresidente de la CNBB, con formación en Filosofía y Teología." },
+    { name: "Mons. Ricardo Hoepers", role: "Secretario general de la CNBB y Obispo auxiliar", bio: "Doctor en Teología Moral, maestro en Bioética y Educación, y actual secretario general de la CNBB." },
+    { name: "P. João Paulo dos Santos, CSsR", role: "Misioneros Redentoristas", bio: "Maestro en Exégesis Bíblica por el Pontificio Instituto Bíblico de Roma y superior provincial de los Misioneros Redentoristas." },
+    { name: "Cardenal Berhaneyesus Demerew Souraphiel", role: "Etiopía", bio: "Arzobispo metropolitano de Adís Abeba y presidente de la Conferencia de Obispos Católicos de Etiopía y Eritrea." },
+    { name: "Dr. Bryan Thatcher", role: "Abba Our Father", bio: "Doctor en Medicina, presidente de Abba Our Father y fundador de los Apóstoles Eucarísticos de la Divina Misericordia." },
+    { name: "P. Elílio de Faria Matos Júnior", role: "Arquidiócesis de Juiz de Fora", bio: "Sacerdote con formación en Teología, Filosofía y Teología Moral, y doctorando en Filosofía." },
+    { name: "Fray Sidney Damasio Machado", role: "Curitiba", bio: "Fraile capuchino, doctor en Teología y profesor de Teología." }
+  ][index]
+}));
+
+const spanishRuleCards: typeof ruleCards = [
+  { ...ruleCards[0], title: "Normas de presentación", summary: "Los trabajos deberán enviarse exclusivamente mediante el formulario de inscripción hasta el <span>18/10/2026.</span>", detail: "<span>IMPORTANTE:</span> Al inscribirse, el participante debe informar el título y los datos del autor o coautores. Sin estos datos no será posible emitir el certificado de trabajo presentado." },
+  { ...ruleCards[1], title: "Envío del resumen", summary: "Título, autores, institución, resumen de hasta 150 palabras y palabras clave.", detail: "• Título del trabajo.\n• Autor o coautores e institución de origen.\n• Resumen de hasta 150 palabras, fuente Times New Roman 12 e interlineado 1,5.\n• De 3 a 5 palabras clave separadas por punto y coma.\n• Archivo Word o equivalente.\n• Los resúmenes aprobados podrán presentarse oralmente en el Congreso." },
+  { ...ruleCards[2], title: "Comunicación oral", summary: "Presentaciones de 10 minutos, con autor inscrito y trabajo aprobado.", detail: "• Tiempo de presentación: 10 minutos.\n• Un autor y hasta 3 coautores.\n• El presentador debe estar inscrito.\n• Habrá un tiempo de debate con los participantes.\n• Las presentaciones serán los días 10, 11 y 12/11/2026, de 17:15 a 18:15." }
+];
+
+const spanishHomeCopy: HomeCopy = {
+  languages: { en: "Inglés", es: "Español", pt: "Portugués", it: "Italiano" },
+  hero: "Un camino de fe en el corazón de la devoción al Padre Eterno",
+  register: "Inscríbete",
+  scheduleSubtitle: "5 días de inmersión teológica",
+  days: [
+    { label: "Lunes", day: "09", month: "Noviembre" },
+    { label: "Martes", day: "10", month: "Noviembre" },
+    { label: "Miércoles", day: "11", month: "Noviembre" },
+    { label: "Jueves", day: "12", month: "Noviembre" },
+    { label: "Viernes", day: "13", month: "Noviembre" }
+  ],
+  schedule: spanishSchedule,
+  mysteryTitle: ["Misterio, Ternura", "y Misión de la Iglesia"],
+  formationTitle: ["Investigación Teológica", "Formación Eclesial"],
+  speakersTitle: ["Conferencistas", "y producción académica"],
+  infoTitle: ["Información", "general"],
+  locationTitle: ["Lugar del", "evento"],
+  indicationsTitle: "Recomendaciones",
+  papersTitle: ["Trabajos", "científicos"],
+  mysteryTabs: spanishMysteryTabs,
+  formationTabs: spanishFormationTabs,
+  speakers: spanishSpeakers,
+  recommendations: {
+    Hoteles: [
+      { ...recommendations["Hotéis"][0], name: "Hotel 01", text: "Alojamiento recomendado cerca del Santuario." },
+      { ...recommendations["Hotéis"][1], name: "Hotel 02", text: "Opción para participantes que buscan fácil desplazamiento." }
+    ],
+    Restaurantes: [
+      { ...recommendations.Restaurantes[0], name: "Restaurante 01", text: "Restaurante para comidas en grupo durante el evento." },
+      { ...recommendations.Restaurantes[1], name: "Restaurante 02", text: "Opción para almuerzo y cena en las cercanías." }
+    ]
+  },
+  ruleCards: spanishRuleCards,
+  info: [["Carga horaria", "40 horas."], ["Certificado", "Se entregará certificado a quienes tengan al menos un 75% de asistencia."], ["Valor de la inscripción", "R$ 200,00"]],
+  location: { name: "Santuario Basílica del Divino Padre Eterno", place: "Trindade, Goiás, Brasil", text: "Un lugar de fe, acogida y espiritualidad que nos inspira a contemplar el misterio de la Paternidad de Dios." },
+  papersHeading: "Ejes temáticos sugeridos para comunicaciones científicas",
+  papers: [
+    "1. Teología Trinitaria y Ontología", "2. Exégesis y Teología Bíblica de la Filiación", "3. Cristología: el Hijo revelador del Padre",
+    "4. Pneumatología: el Espíritu que clama «Abbá»", "5. Antropología Teológica de la Paternidad", "6. Teología Espiritual y Mística",
+    "7. Mariología: María y el misterio de la Paternidad", "8. Liturgia y Expresiones Artísticas", "9. Piedad Popular y Sensus Fidei",
+    "10. Teología Pastoral y Evangelización", "11. Paternidad y Fraternidad Universal", "12. Perspectivas Ecuménicas e Interreligiosas",
+    "13. Diálogos interdisciplinarios sobre la devoción al Divino Padre Eterno"
+  ],
+  registerBand: "Participa en este encuentro internacional de fe, teología y devoción en el Santuario Basílica del Divino Padre Eterno, en Trindade-GO.",
+  footer: "Todos los derechos reservados. Paternidad de Dios @2026"
+};
+
+export const homeCopy: Record<Locale, HomeCopy> = {
+  ...baseHomeCopy,
+  es: spanishHomeCopy
 };

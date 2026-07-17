@@ -1,7 +1,5 @@
-import Link from "next/link";
 import { ArrowIcon } from "@/components/ArrowIcon";
-import type { Locale } from "@/types/locale";
-import { registrationPath } from "@/lib/constants/routes";
+import { hotmartCheckoutUrl } from "@/lib/constants/routes";
 
 type HeroSectionProps = {
   background: string;
@@ -9,10 +7,9 @@ type HeroSectionProps = {
   title: string;
   subtitle: React.ReactNode;
   cta: string;
-  locale: Locale;
 };
 
-export function HeroSection({ background, cta, locale, logo, subtitle, title }: HeroSectionProps) {
+export function HeroSection({ background, cta, logo, subtitle, title }: HeroSectionProps) {
   return (
     <section className="hero-section">
       <div className="hero-media">
@@ -22,10 +19,10 @@ export function HeroSection({ background, cta, locale, logo, subtitle, title }: 
         <img alt="Paternidade de Deus" className="hero-logo" src={logo} />
         <h1 className="sr-only">{title}</h1>
         <p>{subtitle}</p>
-        <Link className="cta-button" href={registrationPath(locale)}>
+        <a className="cta-button" href={hotmartCheckoutUrl()}>
           <ArrowIcon />
           <span>{cta}</span>
-        </Link>
+        </a>
       </div>
     </section>
   );

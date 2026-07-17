@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { LocaleDocumentLanguage } from "@/components/LocaleDocumentLanguage";
 import { assertLocale, supportedLocales } from "@/lib/i18n/locales";
 
 export function generateStaticParams() {
@@ -12,9 +13,14 @@ export default async function LocaleLayout({
   children: ReactNode;
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-  assertLocale(locale);
+  const { locale: localeParam } = await params;
+  const locale = assertLocale(localeParam);
 
-  return children;
+  return (
+    <>
+      <LocaleDocumentLanguage locale={locale} />
+      {children}
+    </>
+  );
 }
 
