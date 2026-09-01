@@ -8,9 +8,9 @@ git push -u origin main
 
 ## Fluxo de inscrição
 
-Os botões de inscrição usam `NEXT_PUBLIC_HOTMART_CHECKOUT_URL` para abrir o checkout da Hotmart.
+Os botões de inscrição usam `NEXT_PUBLIC_REGISTRATION_URL` para abrir a página de inscrição da CiaTicket.
 
-No painel da Hotmart, configure a página de redirecionamento após a compra aprovada para:
+Na plataforma de inscrição, configure a página de redirecionamento após a compra aprovada para:
 
 ```text
 https://SEU-DOMINIO.com/pt/inscricao

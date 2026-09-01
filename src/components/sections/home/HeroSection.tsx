@@ -1,5 +1,5 @@
 import { ArrowIcon } from "@/components/ArrowIcon";
-import { hotmartCheckoutUrl } from "@/lib/constants/routes";
+import { registrationCheckoutUrl } from "@/lib/constants/routes";
 
 type HeroSectionProps = {
   background: string;
@@ -19,7 +19,7 @@ export function HeroSection({ background, cta, logo, subtitle, title }: HeroSect
         <img alt="Paternidade de Deus" className="hero-logo" src={logo} />
         <h1 className="sr-only">{title}</h1>
         <p>{subtitle}</p>
-        <a className="cta-button" href={hotmartCheckoutUrl()}>
+        <a className="cta-button" href={registrationCheckoutUrl()}>
           <ArrowIcon />
           <span>{cta}</span>
         </a>

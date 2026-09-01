@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { type MouseEvent, useState } from "react";
 import { ArrowIcon } from "@/components/ArrowIcon";
-import { hotmartCheckoutUrl } from "@/lib/constants/routes";
+import { registrationCheckoutUrl } from "@/lib/constants/routes";
 import { localeNames, supportedLocales, type Locale } from "@/lib/i18n/locales";
 
 type SiteMenuProps = {
@@ -122,7 +122,7 @@ export function SiteMenu({
           </a>
         ))}
         {showRegistrationButton ? (
-          <a className="header-cta" href={hotmartCheckoutUrl()} onClick={closeMenu}>
+          <a className="header-cta" href={registrationCheckoutUrl()} onClick={closeMenu}>
             <ArrowIcon />
             <span>{labels.registration}</span>
           </a>
