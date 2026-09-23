@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Drawer } from "@/components/Drawer";
+import { SiteAnnouncementModal } from "@/components/SiteAnnouncementModal";
 import { getLegalFooterLinks } from "@/content/legal";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -67,11 +68,17 @@ function TextLines({ text }: { text: string }) {
 
 export function HomePage({ home, labels, locale }: HomePageProps) {
   const [drawer, setDrawer] = useState<DrawerState>(null);
+  const [announcementOpen, setAnnouncementOpen] = useState(true);
   const legalLinks = getLegalFooterLinks(locale);
   const showIndications = false;
 
   return (
     <>
+      <SiteAnnouncementModal
+        closeLabel={labels.close}
+        onClose={() => setAnnouncementOpen(false)}
+        open={announcementOpen}
+      />
       <Header
         brandAlt="Paternidade de Deus"
         brandHref={`/${locale}`}
