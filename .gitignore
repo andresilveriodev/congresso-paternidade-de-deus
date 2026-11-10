@@ -5,9 +5,10 @@ dist/
 
 .env
 .env.*
-.env.example
+!.env.example
 
 *.log
+*.tsbuildinfo
 coverage/
 .netlify/
 
@@ -15,3 +16,4 @@ Paternidade de Deus.fig
 design-system.html
 netlify-deploy/
 output/
+.playwright-cli/

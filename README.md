@@ -17,3 +17,7 @@ https://SEU-DOMINIO.com/pt/inscricao
 ```
 
 Após o participante enviar o formulário, a confirmação aparece por 6 segundos e o site volta automaticamente para a página inicial.
+
+## Galeria de fotos e vídeos
+
+A seção aparece antes dos conferencistas. O passo a passo para configurar a pasta do Google Drive e a playlist do YouTube, os comandos de preparação, os limites do MVP e as validações estão em [GALERIA-CONGRESSO-CONFIGURACAO.md](GALERIA-CONGRESSO-CONFIGURACAO.md).

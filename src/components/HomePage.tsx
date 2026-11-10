@@ -7,6 +7,7 @@ import { getLegalFooterLinks } from "@/content/legal";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ConferencistasSection } from "@/components/sections/home/ConferencistasSection";
+import { GaleriaCongressoSection } from "@/components/sections/home/GaleriaCongressoSection";
 import { HeroSection } from "@/components/sections/home/HeroSection";
 import { IndicacoesSection } from "@/components/sections/home/IndicacoesSection";
 import { InformacoesGeraisSection } from "@/components/sections/home/InformacoesGeraisSection";
@@ -119,6 +120,7 @@ export function HomePage({ home, labels, locale }: HomePageProps) {
           tabs={home.formationTabs}
           title={home.formationTitle}
         />
+        <GaleriaCongressoSection locale={locale} />
         <ConferencistasSection
           onOpenSpeaker={(speaker) =>
             setDrawer({ title: speaker.name, subtitle: speaker.role, image: speaker.image, text: speaker.bio })
