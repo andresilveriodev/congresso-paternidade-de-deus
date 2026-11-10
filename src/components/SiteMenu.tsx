@@ -72,6 +72,7 @@ export function SiteMenu({
   const menuLabels = menuA11y[locale ?? "pt"];
   const links = [
     { label: labels.schedule, href: `${anchorPrefix}#programacao` },
+    { label: labels.gallery, href: `${anchorPrefix}#galeria` },
     { label: labels.speakers, href: `${anchorPrefix}#conferencistas` },
     { label: labels.papers, href: `${anchorPrefix}#trabalhos` },
     { label: labels.location, href: `${anchorPrefix}#local` }
