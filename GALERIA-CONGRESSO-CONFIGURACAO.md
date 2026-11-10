@@ -2,7 +2,7 @@
 
 ## O que já está implementado
 
-A seção `#galeria` fica imediatamente antes de `#conferencistas` na página inicial. Mantém a paleta e os elementos do site e tem textos em português, inglês, espanhol e italiano. As 13 fotos da primeira remessa estão incluídas no projeto e aparecem sem configurar o Drive, com rolagem horizontal, três fotos por vez no computador e ampliação ao clicar. A área de vídeos está oculta por padrão, incluindo o título e a mensagem de publicação em breve.
+A seção `#galeria` fica imediatamente antes de `#conferencistas` na página inicial. Mantém a paleta e os elementos do site e tem textos em português, inglês, espanhol e italiano. As 13 fotos da primeira remessa e as 16 da segunda estão incluídas no projeto, com as novas primeiro. As 29 fotos aparecem sem configurar o Drive, com rolagem horizontal, três fotos por vez no computador e ampliação ao clicar. A área de vídeos está oculta por padrão, incluindo o título e a mensagem de publicação em breve.
 
 O envio direto pelo próprio site está implementado em `/admin/galeria`, com senha e armazenamento Blob privado na Vercel. Consulte [PAINEL-FOTOS.md](PAINEL-FOTOS.md) para ativação inicial e uso. O Google Drive descrito abaixo passa a ser uma integração opcional.
 
@@ -90,7 +90,7 @@ O iframe só é criado após um clique. O conteúdo é reproduzido em `youtube-n
 - Metadados de fotos e do modo opcional de cards usam `unstable_cache`, compatível com a configuração instalada sem `cacheComponents`, com revalidação de **600 segundos**. O player de playlist padrão consulta diretamente o YouTube quando é aberto; não utiliza o cache de vídeos da Data API.
 - O cache é revalidado **por consulta após o prazo**; não há tarefa executando a cada dez minutos. A primeira resposta após vencer o prazo pode conter o catálogo anterior durante a revalidação.
 - Uma página aberta e visível consulta as fotos a cada 30 segundos e ao voltar para a aba. Os vídeos, quando ativados, continuam com intervalo de dez minutos. A galeria preserva as fotos de páginas já carregadas ao incorporar novas imagens; as versões ampliadas continuam sob demanda.
-- Cada página de fotos apresenta até 24 itens, cada página de vídeos 6; o botão “Carregar mais” busca os seguintes.
+- Cada página de fotos apresenta até 36 itens, cada página de vídeos 6; o botão “Carregar mais” busca os seguintes.
 - Listagens Google usam `nextPageToken`. Por segurança, o catálogo é limitado a 30 pastas imediatas, 2.000 fotos e 500 itens de playlist; cada listagem tem limite de páginas. A API informa `limited` quando um teto de catálogo é alcançado. Para mais volume, evolua para storage persistente/sincronização em lotes.
 - Consultas de catálogo têm prazo total de 25 segundos; a leitura do Drive tem orçamento de 45 chamadas por atualização. Uma falha não substitui deliberadamente o cache válido por um catálogo vazio.
 - Os metadados são cacheados pelo mecanismo de dados do Next e seu adaptador de hospedagem. O comportamento de retenção em falhas precisa ser confirmado na implantação real; não há banco próprio nem índice durável adicional.

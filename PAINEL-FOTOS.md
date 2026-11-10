@@ -12,7 +12,7 @@ Endereço: `https://congressopaieterno.com.br/admin/galeria`.
 
 O painel aceita JPG, PNG e WebP de até 20 MB e 40 megapixels por foto. Prepara uma versão de até 1920 px antes do envio; o servidor valida e gera WebP e miniatura sem cortar a imagem e sem metadados EXIF/GPS. O arquivo original no computador não é modificado. HEIC e arquivos animados não são suportados.
 
-As fotos novas entram antes das 13 imagens já incluídas no projeto. A galeria mantém três imagens por vez no computador, rolagem horizontal e ampliação ao clicar. Páginas abertas buscam novidades a cada 30 segundos enquanto estiverem visíveis e ao voltar para a aba. Uma outra aba do mesmo navegador também recebe a notificação do painel. Não é necessário fazer commit ou nova publicação para cada remessa. Reenviar a mesma imagem preparada não cria outra cópia.
+As fotos novas entram antes das 29 imagens já incluídas no projeto (13 da primeira remessa e 16 da segunda). A galeria mantém três imagens por vez no computador, rolagem horizontal e ampliação ao clicar. Páginas abertas buscam novidades a cada 30 segundos enquanto estiverem visíveis e ao voltar para a aba. Uma outra aba do mesmo navegador também recebe a notificação do painel. Não é necessário fazer commit ou nova publicação para cada remessa. Reenviar a mesma imagem preparada não cria outra cópia.
 
 ## Hospedagem identificada
 

@@ -1,5 +1,5 @@
 export const GALLERY_REVALIDATE_SECONDS = 600;
-export const PHOTO_PAGE_SIZE = 24;
+export const PHOTO_PAGE_SIZE = 36;
 export const VIDEO_PAGE_SIZE = 6;
 export const MAX_PHOTO_BYTES = 20 * 1024 * 1024;
 export const ALLOWED_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
