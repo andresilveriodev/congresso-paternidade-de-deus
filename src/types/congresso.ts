@@ -23,6 +23,7 @@ export type PhotoGalleryData = {
   days: string[];
   nextPage?: number;
   limited?: boolean;
+  partial?: boolean;
 };
 
 export type VideoGalleryData = {

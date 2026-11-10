@@ -4,15 +4,17 @@
 
 A seção `#galeria` fica imediatamente antes de `#conferencistas` na página inicial. Mantém a paleta e os elementos do site e tem textos em português, inglês, espanhol e italiano. As 13 fotos da primeira remessa estão incluídas no projeto e aparecem sem configurar o Drive, com rolagem horizontal, três fotos por vez no computador e ampliação ao clicar. A área de vídeos está oculta por padrão, incluindo o título e a mensagem de publicação em breve.
 
+O envio direto pelo próprio site está implementado em `/admin/galeria`, com senha e armazenamento Blob privado na Vercel. Consulte [PAINEL-FOTOS.md](PAINEL-FOTOS.md) para ativação inicial e uso. O Google Drive descrito abaixo passa a ser uma integração opcional.
+
 ### Visibilidade dos vídeos — atualização de 10/11/2026
 
 Para mostrar novamente a área, defina `NEXT_PUBLIC_CONGRESS_VIDEOS_ENABLED=true` em `.env.local` e configure a playlist conforme as instruções abaixo. Reinicie o servidor local. Na hospedagem, defina a mesma variável e faça uma nova compilação/publicação, pois variáveis `NEXT_PUBLIC_` são incorporadas durante a compilação. Enquanto a variável estiver ausente ou com valor `false`, o componente de vídeos não é exibido nem faz consultas à API de vídeos. Para ocultar novamente, use `false`.
 
-O projeto usa Next.js 16.1.6, React 19, TypeScript e App Router em `src/app`. O arquivo `netlify.toml` usa `@netlify/plugin-nextjs`; não há exportação estática, armazenamento persistente, banco ou agendador de galerias. A integração existente de planilhas era apenas um ponto de extensão, sem autenticação Google reaproveitável. O checkout não contém diretório `.git`.
+O projeto usa Next.js 16.4.6, React 19, TypeScript e App Router em `src/app`. O repositório está conectado à publicação na Vercel; o arquivo `netlify.toml` foi preservado como configuração legada. O painel usa armazenamento persistente Blob quando ativado, sem banco relacional ou agendador. O checkout está conectado ao histórico Git do repositório.
 
 Foi implementado o MVP com proxy de fotos e cache sob demanda. Não foi criado cron nem uma sincronização para storage. Apenas a dependência `sharp`, que já era instalada pelo Next, foi declarada diretamente para gerar miniaturas e validar imagens.
 
-## Amanhã: configurar os links
+## Configuração opcional do Google Drive e YouTube
 
 ### Atualização de 09/11/2026
 
@@ -87,7 +89,7 @@ O iframe só é criado após um clique. O conteúdo é reproduzido em `youtube-n
 
 - Metadados de fotos e do modo opcional de cards usam `unstable_cache`, compatível com a configuração instalada sem `cacheComponents`, com revalidação de **600 segundos**. O player de playlist padrão consulta diretamente o YouTube quando é aberto; não utiliza o cache de vídeos da Data API.
 - O cache é revalidado **por consulta após o prazo**; não há tarefa executando a cada dez minutos. A primeira resposta após vencer o prazo pode conter o catálogo anterior durante a revalidação.
-- Uma página aberta e visível também consulta as APIs internas a cada dez minutos. Ao atualizar, a listagem volta para a primeira página; as imagens ampliadas continuam sob demanda.
+- Uma página aberta e visível consulta as fotos a cada 30 segundos e ao voltar para a aba. Os vídeos, quando ativados, continuam com intervalo de dez minutos. A galeria preserva as fotos de páginas já carregadas ao incorporar novas imagens; as versões ampliadas continuam sob demanda.
 - Cada página de fotos apresenta até 24 itens, cada página de vídeos 6; o botão “Carregar mais” busca os seguintes.
 - Listagens Google usam `nextPageToken`. Por segurança, o catálogo é limitado a 30 pastas imediatas, 2.000 fotos e 500 itens de playlist; cada listagem tem limite de páginas. A API informa `limited` quando um teto de catálogo é alcançado. Para mais volume, evolua para storage persistente/sincronização em lotes.
 - Consultas de catálogo têm prazo total de 25 segundos; a leitura do Drive tem orçamento de 45 chamadas por atualização. Uma falha não substitui deliberadamente o cache válido por um catálogo vazio.

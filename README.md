@@ -21,3 +21,5 @@ Após o participante enviar o formulário, a confirmação aparece por 6 segundo
 ## Galeria de fotos e vídeos
 
 A seção aparece antes dos conferencistas. O passo a passo para configurar a pasta do Google Drive e a playlist do YouTube, os comandos de preparação, os limites do MVP e as validações estão em [GALERIA-CONGRESSO-CONFIGURACAO.md](GALERIA-CONGRESSO-CONFIGURACAO.md).
+
+O envio direto de fotos é feito pelo painel `/admin/galeria`, com acesso por senha e armazenamento privado na Vercel. A ativação, os testes locais e o uso diário estão em [PAINEL-FOTOS.md](PAINEL-FOTOS.md).

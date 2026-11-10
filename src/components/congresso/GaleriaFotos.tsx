@@ -13,7 +13,7 @@ export function GaleriaFotos({ copy }: { copy: GalleryCopy }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [scrollState, setScrollState] = useState({ previous: false, next: false });
   const { data, failed, loading, loadingMore, loadMore, retry } = useGallery<PhotoGalleryData>(
-    `/api/congresso/fotos${day ? `?day=${encodeURIComponent(day)}` : ""}`
+    `/api/congresso/fotos${day ? `?day=${encodeURIComponent(day)}` : ""}`, 30_000
   );
   const photos = data?.items ?? [];
   const selectedIndex = photos.findIndex((photo) => photo.id === selectedId);
@@ -72,7 +72,7 @@ export function GaleriaFotos({ copy }: { copy: GalleryCopy }) {
         </button>)}
       </div>
       {data?.nextPage && <button className="gallery-more" disabled={loadingMore} onClick={loadMore} type="button">{loadingMore ? copy.loading : copy.more}<span aria-hidden="true">↓</span></button>}
-      {failed && <GalleryState copy={copy} failed kind="photo" onRetry={retry} />}
+      {(failed || data?.partial) && <GalleryState copy={copy} failed kind="photo" onRetry={retry} />}
     </> : <GalleryState copy={copy} failed={failed} kind="photo" loading={loading} onRetry={retry} />}
     {selected && <GalleryModal copy={copy} onClose={() => setSelectedId(null)}
       onNext={photos.length > 1 ? () => navigate(1) : undefined} onPrevious={photos.length > 1 ? () => navigate(-1) : undefined}

@@ -19,7 +19,8 @@ export async function GET(request: Request) {
       status: "ready",
       ...pageItems(day ? catalog.items.filter((item) => item.day === day) : catalog.items, page, PHOTO_PAGE_SIZE),
       days: [...new Set(catalog.items.flatMap((item) => item.day ? [item.day] : []))].sort((a, b) => a.localeCompare(b, "pt-BR", { numeric: true })),
-      limited: catalog.limited
+      limited: catalog.limited,
+      partial: catalog.partial
     } : { status: "unconfigured", items: [], days: [] };
     return Response.json(data, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {

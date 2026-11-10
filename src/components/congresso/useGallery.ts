@@ -5,7 +5,7 @@ import type { GalleryStatus } from "@/types/congresso";
 
 type GalleryData = { status: GalleryStatus; items: { id: string }[]; nextPage?: number };
 
-export function useGallery<T extends GalleryData>(url: string) {
+export function useGallery<T extends GalleryData>(url: string, refreshInterval = 600_000) {
   const [result, setResult] = useState<{ url: string; data?: T; failed: boolean }>();
   const [requestVersion, setRequestVersion] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -17,23 +17,44 @@ export function useGallery<T extends GalleryData>(url: string) {
   useEffect(() => {
     const abort = new AbortController();
     controller.current = abort;
+    let fetching = false;
     async function load() {
+      if (fetching || loadingMoreRef.current) return;
+      fetching = true;
       try {
         const response = await fetch(url, { signal: abort.signal });
         const next = await response.json() as T;
         if (!response.ok || next.status === "unavailable") throw new Error("UNAVAILABLE");
-        if (!abort.signal.aborted) setResult({ url, data: next, failed: false });
+        if (!abort.signal.aborted) setResult((previous) => {
+          const prior = previous?.url === url ? previous.data : undefined;
+          // Preserve already loaded pages while new photos are added at the front.
+          const overlaps = prior?.items.some((item) => next.items.some((fresh) => fresh.id === item.id));
+          const data = prior ? {
+            ...next, nextPage: overlaps ? prior.nextPage : next.nextPage,
+            items: [...new Map([...next.items, ...prior.items].map((item) => [item.id, item])).values()]
+          } as T : next;
+          return { url, data, failed: false };
+        });
       } catch {
         if (!abort.signal.aborted) setResult((previous) => ({ url, data: previous?.url === url ? previous.data : undefined, failed: true }));
-      }
+      } finally { fetching = false; }
     }
     void load();
-    // Revalidation is demand-driven. Open visible pages also check every ten minutes.
+    const refreshVisible = () => { if (document.visibilityState === "visible") void load(); };
+    const onStorage = (event: StorageEvent) => { if (event.key === "congresso-gallery-updated") refreshVisible(); };
     const interval = window.setInterval(() => {
-      if (document.visibilityState === "visible" && !loadingMoreRef.current) void load();
-    }, 600_000);
-    return () => { abort.abort(); window.clearInterval(interval); };
-  }, [url, requestVersion]);
+      refreshVisible();
+    }, refreshInterval);
+    window.addEventListener("focus", refreshVisible);
+    window.addEventListener("storage", onStorage);
+    document.addEventListener("visibilitychange", refreshVisible);
+    return () => {
+      abort.abort(); window.clearInterval(interval);
+      window.removeEventListener("focus", refreshVisible);
+      window.removeEventListener("storage", onStorage);
+      document.removeEventListener("visibilitychange", refreshVisible);
+    };
+  }, [url, requestVersion, refreshInterval]);
 
   const retry = useCallback(() => setRequestVersion((value) => value + 1), []);
 

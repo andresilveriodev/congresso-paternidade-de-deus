@@ -7,17 +7,22 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:galeria": "node --experimental-strip-types --test tests/congresso.test.mjs",
+    "test:galeria": "node --experimental-strip-types --test tests/congresso.test.mjs tests/gallery-admin.test.mjs",
     "galeria:configurar": "node scripts/configurar-galeria.mjs",
-    "galeria:verificar": "node scripts/configurar-galeria.mjs --check"
+    "galeria:verificar": "node scripts/configurar-galeria.mjs --check",
+    "galeria:painel": "node scripts/preparar-painel-galeria.mjs"
+  },
+  "overrides": {
+    "@vercel/cli-config": "0.3.8"
   },
   "dependencies": {
-    "next": "16.1.6",
+    "@vercel/blob": "^2.9.0",
+    "next": "16.4.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.68.0",
     "resend": "^6.16.0",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.5",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -26,7 +31,7 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "eslint": "^9.39.0",
-    "eslint-config-next": "16.1.6",
+    "eslint-config-next": "16.4.6",
     "typescript": "^5.9.0"
   }
 }

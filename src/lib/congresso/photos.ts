@@ -5,6 +5,8 @@ import { congressPhotos } from "@/content/congress-photos";
 import type { CongressPhoto } from "@/types/congresso";
 import { GalleryError, getDriveConfig } from "./config";
 import { driveFetch, listDriveFiles, readDriveFile } from "./google-drive";
+import { getUploadedPhotoBytes, getUploadedPhotos } from "./upload-storage";
+import { logGalleryError } from "./config";
 import { GALLERY_REVALIDATE_SECONDS, isAllowedPhoto, isAuthorizedPhoto, isDriveId, MAX_PHOTO_BYTES, photoTitle } from "./policy";
 
 const readCatalog = unstable_cache(async (_sourceKey: string) => {
@@ -37,13 +39,24 @@ const readCatalog = unstable_cache(async (_sourceKey: string) => {
 }, ["congress-photo-catalog-v1"], { revalidate: GALLERY_REVALIDATE_SECONDS });
 
 export async function getPhotoCatalog() {
-  const config = getDriveConfig();
-  if (!config) return { items: congressPhotos, limited: false };
-  const catalog = await readCatalog(config.cacheKey);
-  return { ...catalog, items: [...congressPhotos, ...catalog.items] };
+  let partial = false;
+  let uploaded: CongressPhoto[] = [];
+  try { uploaded = await getUploadedPhotos(); }
+  catch (error) { partial = true; logGalleryError("photos", error); }
+  let remote: { items: CongressPhoto[]; limited: boolean } = { items: [], limited: false };
+  try {
+    const config = getDriveConfig();
+    if (config) remote = await readCatalog(config.cacheKey);
+  } catch (error) { partial = true; logGalleryError("photos", error); }
+  return { items: [...uploaded, ...congressPhotos, ...remote.items], limited: remote.limited, partial };
 }
 
 export async function getPhotoBytes(id: string, thumbnail: boolean) {
+  if (id.startsWith("upload_")) {
+    const bytes = await getUploadedPhotoBytes(id, thumbnail);
+    if (!bytes) throw new GalleryError("NOT_FOUND");
+    return bytes;
+  }
   const source = getDriveConfig();
   if (!source || !isDriveId(id)) throw new GalleryError("NOT_FOUND");
   const config = { ...source, signal: AbortSignal.timeout(25000) };
