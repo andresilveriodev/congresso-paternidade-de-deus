@@ -9,13 +9,13 @@ import { useGallery } from "./useGallery";
 
 export function GaleriaVideos({ copy }: { copy: GalleryCopy }) {
   const { data, failed, loading, loadingMore, loadMore, retry } = useGallery<VideoGalleryData>("/api/congresso/videos");
-  const [selected, setSelected] = useState<CongressVideo | "playlist" | null>(null);
+  const [selected, setSelected] = useState<CongressVideo | null>(null);
   const videos = data?.items ?? [];
-  const playerUrl = selected === "playlist" && data?.playlistId
-    ? `https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(data.playlistId)}&rel=0`
-    : selected && typeof selected !== "string" && /^[\w-]{11}$/.test(selected.id)
+  const playlistId = data?.mode === "playlist" ? data.playlistId : undefined;
+  const playlistUrl = playlistId
+    ? `https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(playlistId)}&rel=0&playsinline=1` : null;
+  const playerUrl = selected && /^[\w-]{11}$/.test(selected.id)
       ? `https://www.youtube-nocookie.com/embed/${selected.id}?rel=0&autoplay=1` : null;
-  const playerTitle = selected && typeof selected !== "string" ? selected.title : copy.playlist;
 
   return <div className="gallery-group" id="galeria-videos">
     <div className="gallery-group-heading"><h3>{copy.videos}</h3></div>
@@ -30,12 +30,17 @@ export function GaleriaVideos({ copy }: { copy: GalleryCopy }) {
       </button>)}</div>
       {data?.nextPage && <button className="gallery-more" disabled={loadingMore} onClick={loadMore} type="button">{loadingMore ? copy.loading : copy.more}<span aria-hidden="true">↓</span></button>}
       {failed && <GalleryState copy={copy} failed kind="video" onRetry={retry} />}
-    </> : data?.mode === "playlist" && data.playlistId ? <button className="gallery-playlist" onClick={() => setSelected("playlist")} type="button">
-      <span aria-hidden="true" className="gallery-play">▶</span><strong>{copy.playlist}</strong><span>{copy.openPlaylist} ↗</span>
-    </button> : <GalleryState copy={copy} failed={failed} kind="video" loading={loading} onRetry={retry} />}
-    {selected && playerUrl && <GalleryModal copy={copy} onClose={() => setSelected(null)} title={playerTitle} video>
+    </> : playlistUrl && playlistId ? <div className="gallery-playlist">
       <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen referrerPolicy="strict-origin-when-cross-origin" src={playerUrl} title={playerTitle} />
+        allowFullScreen loading="lazy" referrerPolicy="strict-origin-when-cross-origin" src={playlistUrl} title={copy.playlist} />
+      <div className="gallery-playlist-footer">
+        <p>{copy.playlistHelp}</p>
+        <a href={`https://www.youtube.com/playlist?list=${encodeURIComponent(playlistId)}`} rel="noopener noreferrer" target="_blank">{copy.openYouTube} <span aria-hidden="true">↗</span></a>
+      </div>
+    </div> : <GalleryState copy={copy} failed={failed} kind="video" loading={loading} onRetry={retry} />}
+    {selected && playerUrl && <GalleryModal copy={copy} onClose={() => setSelected(null)} title={selected.title} video>
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen referrerPolicy="strict-origin-when-cross-origin" src={playerUrl} title={selected.title} />
     </GalleryModal>}
   </div>;
 }

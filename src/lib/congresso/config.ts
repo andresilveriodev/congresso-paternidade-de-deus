@@ -1,5 +1,6 @@
 import "server-only";
 import { createHash } from "node:crypto";
+import { congressPlaylistId } from "@/content/congress-videos";
 import { isDriveId, isPlaylistId } from "./policy";
 
 export class GalleryError extends Error {
@@ -27,8 +28,7 @@ export function getDriveConfig() {
 }
 
 export function getYouTubeConfig() {
-  const playlistId = process.env.YOUTUBE_PLAYLIST_ID?.trim();
-  if (!playlistId) return null;
+  const playlistId = process.env.YOUTUBE_PLAYLIST_ID?.trim() || congressPlaylistId;
   if (!isPlaylistId(playlistId)) throw new GalleryError("CONFIGURATION");
   const displayMode = process.env.YOUTUBE_DISPLAY_MODE?.trim() || "playlist";
   if (displayMode !== "playlist" && displayMode !== "cards") throw new GalleryError("CONFIGURATION");

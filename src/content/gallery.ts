@@ -9,6 +9,7 @@ const pt = {
   loading: "Carregando registros…", retry: "Tentar novamente", more: "Carregar mais", close: "Fechar",
   previous: "Foto anterior", next: "Próxima foto", enlarge: "Ampliar foto", watch: "Assistir ao vídeo",
   playlist: "Acompanhe a playlist oficial do Congresso", openPlaylist: "Reproduzir playlist",
+  playlistHelp: "Assista aos vídeos da playlist e use os controles do player para navegar.", openYouTube: "Abrir no YouTube",
   missingImage: "Imagem indisponível", photoAlt: "Registro do Congresso", counter: "de"
 };
 
@@ -23,6 +24,7 @@ export const galleryCopy: Record<Locale, GalleryCopy> = {
     unavailable: "The gallery could not be loaded. Please try again shortly.",
     loading: "Loading…", retry: "Try again", more: "Load more", close: "Close", previous: "Previous photo", next: "Next photo",
     enlarge: "Enlarge photo", watch: "Watch video", playlist: "Follow the official Congress playlist", openPlaylist: "Play playlist",
+    playlistHelp: "Watch the playlist videos and use the player controls to browse them.", openYouTube: "Open on YouTube",
     missingImage: "Image unavailable", photoAlt: "Congress photo", counter: "of"
   },
   es: {
@@ -32,6 +34,7 @@ export const galleryCopy: Record<Locale, GalleryCopy> = {
     unavailable: "No se pudo cargar la galería. Inténtalo de nuevo en unos instantes.",
     loading: "Cargando…", retry: "Intentar de nuevo", more: "Cargar más", close: "Cerrar", previous: "Foto anterior", next: "Foto siguiente",
     enlarge: "Ampliar foto", watch: "Ver vídeo", playlist: "Sigue la lista oficial del Congreso", openPlaylist: "Reproducir lista",
+    playlistHelp: "Mira los vídeos de la lista y usa los controles del reproductor para navegar.", openYouTube: "Abrir en YouTube",
     missingImage: "Imagen no disponible", photoAlt: "Foto del Congreso", counter: "de"
   },
   it: {
@@ -41,6 +44,7 @@ export const galleryCopy: Record<Locale, GalleryCopy> = {
     unavailable: "Impossibile caricare la galleria. Riprova tra qualche istante.",
     loading: "Caricamento…", retry: "Riprova", more: "Carica altro", close: "Chiudi", previous: "Foto precedente", next: "Foto successiva",
     enlarge: "Ingrandisci foto", watch: "Guarda il video", playlist: "Segui la playlist ufficiale del Congresso", openPlaylist: "Riproduci playlist",
+    playlistHelp: "Guarda i video della playlist e usa i controlli del lettore per navigare.", openYouTube: "Apri su YouTube",
     missingImage: "Immagine non disponibile", photoAlt: "Foto del Congresso", counter: "di"
   }
 };

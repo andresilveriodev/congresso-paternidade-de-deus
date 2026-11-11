@@ -2,13 +2,13 @@
 
 ## O que já está implementado
 
-A seção `#galeria` fica imediatamente antes de `#conferencistas` na página inicial. Mantém a paleta e os elementos do site e tem textos em português, inglês, espanhol e italiano. As 13 fotos da primeira remessa e as 16 da segunda estão incluídas no projeto, com as novas primeiro. As 29 fotos aparecem sem configurar o Drive, com rolagem horizontal, três fotos por vez no computador e ampliação ao clicar. A área de vídeos está oculta por padrão, incluindo o título e a mensagem de publicação em breve.
+A seção `#galeria` fica imediatamente antes de `#conferencistas` na página inicial. Mantém a paleta e os elementos do site e tem textos em português, inglês, espanhol e italiano. As 13 fotos da primeira remessa e as 16 da segunda estão incluídas no projeto, com as novas primeiro. As 29 fotos aparecem sem configurar o Drive, com rolagem horizontal, três fotos por vez no computador e ampliação ao clicar. O player da playlist oficial aparece logo abaixo das fotos.
 
 O envio direto pelo próprio site está implementado em `/admin/galeria`, com senha e armazenamento Blob privado na Vercel. Consulte [PAINEL-FOTOS.md](PAINEL-FOTOS.md) para ativação inicial e uso. O Google Drive descrito abaixo passa a ser uma integração opcional.
 
-### Visibilidade dos vídeos — atualização de 10/11/2026
+### Visibilidade dos vídeos — atualização de 11/11/2026
 
-Para mostrar novamente a área, defina `NEXT_PUBLIC_CONGRESS_VIDEOS_ENABLED=true` em `.env.local` e configure a playlist conforme as instruções abaixo. Reinicie o servidor local. Na hospedagem, defina a mesma variável e faça uma nova compilação/publicação, pois variáveis `NEXT_PUBLIC_` são incorporadas durante a compilação. Enquanto a variável estiver ausente ou com valor `false`, o componente de vídeos não é exibido nem faz consultas à API de vídeos. Para ocultar novamente, use `false`.
+A área está visível nos quatro idiomas e usa a playlist oficial `PLXOahXK6w5UA`, sem depender de chave da API ou de configuração na hospedagem. A antiga variável `NEXT_PUBLIC_CONGRESS_VIDEOS_ENABLED` foi removida da implementação. Os visitantes assistem e navegam pelos vídeos usando os controles oficiais do YouTube.
 
 O projeto usa Next.js 16.4.6, React 19, TypeScript e App Router em `src/app`. O repositório está conectado à publicação na Vercel; o arquivo `netlify.toml` foi preservado como configuração legada. O painel usa armazenamento persistente Blob quando ativado, sem banco relacional ou agendador. O checkout está conectado ao histórico Git do repositório.
 
@@ -43,10 +43,9 @@ O arquivo `.env.example` contém os campos abaixo; apenas o modo de exibição v
 | --- | --- |
 | `GOOGLE_DRIVE_FOLDER_ID` | ID da pasta raiz de fotos. |
 | `GOOGLE_SERVICE_ACCOUNT_JSON` | JSON da conta de serviço, completo e em uma linha. |
-| `YOUTUBE_PLAYLIST_ID` | ID da playlist; corresponde ao parâmetro `list` no link. |
+| `YOUTUBE_PLAYLIST_ID` | Opcional: substitui a playlist oficial; corresponde ao parâmetro `list` no link. |
 | `YOUTUBE_DISPLAY_MODE` | `playlist` por padrão. `cards` somente se houver decisão de usar a Data API. |
 | `YOUTUBE_API_KEY` | Ignorada no modo `playlist`; usada apenas no modo opcional `cards`. |
-| `NEXT_PUBLIC_CONGRESS_VIDEOS_ENABLED` | `false` por padrão; `true` exibe a área de vídeos. Configuração pública, sem credenciais. |
 
 ### Ativar as fotos do Drive
 
@@ -73,17 +72,17 @@ As subpastas imediatas viram filtros por dia. Pastas dentro de outras subpastas 
 
 Aceita JPG, PNG e WebP, até 20 MiB por arquivo e 40 milhões de pixels. PDFs, SVGs, atalhos, arquivos na lixeira e arquivos sem tamanho válido são ignorados. O proxy verifica novamente a pasta de origem, valida/reencoda a imagem com `sharp`, remove metadados EXIF/GPS e entrega WebP: miniatura de até 640 × 480 e versão ampliada de até 1920 × 1920.
 
-### Ativar os vídeos
+### Playlist de vídeos
 
 1. Use uma playlist pública do Congresso e adicione os vídeos que a equipe deseja apresentar.
-2. Configure `YOUTUBE_PLAYLIST_ID` pelo comando acima.
-3. Defina `NEXT_PUBLIC_CONGRESS_VIDEOS_ENABLED=true` para exibir a área. Com o ID configurado, ela apresenta um botão que abre o **player oficial da playlist**. `YOUTUBE_DISPLAY_MODE` fica em `playlist` por padrão; a chave já salva não muda esse comportamento.
+2. A playlist oficial `PLXOahXK6w5UA`, fornecida em 11/11/2026, está configurada em `src/content/congress-videos.ts`. Opcionalmente, substitua-a por `YOUTUBE_PLAYLIST_ID` pelo comando acima.
+3. O **player oficial da playlist** aparece diretamente abaixo das fotos, com o menu de vídeos do YouTube e um link alternativo para abrir a playlist no YouTube. A área não depende de uma variável de ativação. `YOUTUBE_DISPLAY_MODE` fica em `playlist` por padrão; a chave já salva não muda esse comportamento.
 4. Reinicie o servidor depois de cadastrar o link. A partir daí, a equipe adiciona os vídeos à **mesma playlist no YouTube**. Ao abrir/reabrir o player ou recarregar a página, o YouTube carrega a lista disponível, sem editar o site ou fazer novo deploy. Uma lista que já esteja aberta pode precisar ser recarregada; não se promete atualização instantânea durante a reprodução, e vale o tempo de processamento/cache do YouTube.
-5. A playlist e os vídeos precisam permitir visualização e incorporação. A reprodução real continua pendente do link correto.
+5. A playlist e os vídeos precisam permitir visualização e incorporação.
 
 Somente se for solicitado no futuro o modo de cards individuais: defina `YOUTUBE_DISPLAY_MODE=cards`, habilite **YouTube Data API v3** e configure uma chave adequada ao servidor em `YOUTUBE_API_KEY`. Nesse modo, a integração consulta `playlistItems.list` e `videos.list`, preserva a ordem e descarta vídeos privados, removidos, não processados ou sem incorporação. A restrição por referenciador HTTP da chave recebida precisaria ser revista apenas para esse uso opcional.
 
-O iframe só é criado após um clique. O conteúdo é reproduzido em `youtube-nocookie.com`; nenhum vídeo é baixado pelo site. No modo opcional de cards, uma miniatura ausente recebe alternativa visual e falhas de quota/rede mostram indisponibilidade.
+O iframe da playlist usa carregamento adiado (`loading="lazy"`) e não inicia a reprodução automaticamente. O conteúdo é reproduzido em `youtube-nocookie.com`; nenhum vídeo é baixado pelo site. No modo opcional de cards, o modal só abre após um clique; uma miniatura ausente recebe alternativa visual e falhas de quota/rede mostram indisponibilidade.
 
 ## Atualização e limites reais
 

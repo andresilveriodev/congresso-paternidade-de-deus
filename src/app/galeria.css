@@ -98,9 +98,12 @@
 .gallery-play { align-items: center; background: var(--navy); border: 1px solid rgba(255,255,255,.4); border-radius: 50%; color: var(--gold); display: inline-flex; flex-shrink: 0; font-size: 18px; height: 52px; justify-content: center; padding-left: 3px; width: 52px; }
 .gallery-video-thumbnail .gallery-play { box-shadow: 0 4px 24px rgba(0,0,0,.15); position: absolute; }
 .gallery-video-title { color: var(--navy); display: block; font-size: 15px; font-weight: 500; line-height: 1.5; padding-top: 14px; }
-.gallery-playlist { align-items: center; background: var(--navy); border: 0; border-radius: var(--radius); color: white; display: flex; flex-direction: column; gap: 18px; justify-content: center; min-height: 220px; padding: 28px; text-align: center; width: 100%; }
-.gallery-playlist strong { font-size: 18px; font-weight: 500; }
-.gallery-playlist > span:last-child { color: #e4c28f; font-size: 14px; }
+.gallery-playlist { width: 100%; }
+.gallery-playlist iframe { aspect-ratio: 16 / 9; background: var(--navy); border: 0; border-radius: var(--radius); display: block; min-height: 200px; width: 100%; }
+.gallery-playlist-footer { align-items: baseline; display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; padding-top: 16px; }
+.gallery-playlist-footer p { color: #586168; font-size: 14px; line-height: 1.6; margin: 0; }
+.gallery-playlist-footer a { color: var(--navy); flex-shrink: 0; font-size: 14px; text-underline-offset: 4px; }
+.gallery-playlist-footer a:focus-visible { outline: 3px solid #8d6d37; outline-offset: 4px; }
 .gallery-image-fallback { align-items: center; background: #e8e2d8; color: #586168; display: flex; flex-direction: column; font-size: 13px; gap: 12px; height: 100%; justify-content: center; min-height: 160px; padding: 24px; width: 100%; }
 .gallery-image-fallback svg { height: 32px; width: 32px; }
 

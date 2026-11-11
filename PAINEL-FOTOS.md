@@ -54,5 +54,5 @@ Para gerar outra senha: `npm run galeria:painel -- --reset-password`. Depois atu
 - Limite inicial: 2.000 fotos enviadas pelo painel, além das fotos do projeto e eventual integração do Drive. Para volumes maiores, evoluir o catálogo e a paginação.
 - O consumo de armazenamento, operações e tráfego segue o plano da Vercel. O painel não altera o plano nem contrata capacidade adicional.
 - Remover da seleção e limpar publicadas apenas limpam o painel; não apagam fotos já publicadas.
-- Os vídeos permanecem ocultos até a ativação de `NEXT_PUBLIC_CONGRESS_VIDEOS_ENABLED`.
+- Os vídeos da playlist oficial do Congresso aparecem abaixo das fotos. A playlist é gerenciada no YouTube, independentemente deste painel.
 - O projeto foi atualizado para Next.js 16.4.6 e Sharp 0.35.5 durante a implementação para corrigir os alertas de segurança das versões anteriores. O SDK do Blob usa a correção `@vercel/cli-config` 0.3.8 por override, sem alterar o plano da hospedagem.
