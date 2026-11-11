@@ -99,6 +99,9 @@
 .gallery-video-thumbnail .gallery-play { box-shadow: 0 4px 24px rgba(0,0,0,.15); position: absolute; }
 .gallery-video-title { color: var(--navy); display: block; font-size: 15px; font-weight: 500; line-height: 1.5; padding-top: 14px; }
 .gallery-playlist { width: 100%; }
+.gallery-playlist-grid { display: grid; gap: 24px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.gallery-playlist-grid article { min-width: 0; }
+.gallery-playlist-title { color: var(--navy); font-size: 15px; font-weight: 500; line-height: 1.5; margin: 12px 0 0; }
 .gallery-playlist iframe { aspect-ratio: 16 / 9; background: var(--navy); border: 0; border-radius: var(--radius); display: block; min-height: 200px; width: 100%; }
 .gallery-playlist-footer { align-items: baseline; display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; padding-top: 16px; }
 .gallery-playlist-footer p { color: #586168; font-size: 14px; line-height: 1.6; margin: 0; }
@@ -151,6 +154,7 @@
   .gallery-photo-caption { font-size: 11px; padding: 10px 12px; }
   .gallery-photo-caption > span { font-size: 18px; }
   .gallery-video-grid { grid-template-columns: 1fr; }
+  .gallery-playlist-grid { grid-template-columns: 1fr; }
   .gallery-modal { padding: 68px 16px 24px; }
   .gallery-modal-caption { align-items: flex-start; gap: 12px; }
   .gallery-modal-media > img, .gallery-modal-media iframe { max-height: calc(100dvh - 220px); }

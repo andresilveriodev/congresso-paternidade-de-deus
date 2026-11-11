@@ -8,7 +8,7 @@ O envio direto pelo próprio site está implementado em `/admin/galeria`, com se
 
 ### Visibilidade dos vídeos — atualização de 11/11/2026
 
-A área está visível nos quatro idiomas e usa a playlist oficial `PLXOahXK6w5UA`, sem depender de chave da API ou de configuração na hospedagem. A antiga variável `NEXT_PUBLIC_CONGRESS_VIDEOS_ENABLED` foi removida da implementação. Os visitantes assistem e navegam pelos vídeos usando os controles oficiais do YouTube.
+A área está visível nos quatro idiomas e usa a playlist oficial `PLXOahXK6w5UA`, sem depender de chave da API ou de configuração na hospedagem. Os dois vídeos atuais aparecem em players independentes, com títulos, lado a lado no computador e empilhados no celular. A antiga variável `NEXT_PUBLIC_CONGRESS_VIDEOS_ENABLED` foi removida da implementação.
 
 O projeto usa Next.js 16.4.6, React 19, TypeScript e App Router em `src/app`. O repositório está conectado à publicação na Vercel; o arquivo `netlify.toml` foi preservado como configuração legada. O painel usa armazenamento persistente Blob quando ativado, sem banco relacional ou agendador. O checkout está conectado ao histórico Git do repositório.
 
@@ -76,20 +76,20 @@ Aceita JPG, PNG e WebP, até 20 MiB por arquivo e 40 milhões de pixels. PDFs, S
 
 1. Use uma playlist pública do Congresso e adicione os vídeos que a equipe deseja apresentar.
 2. A playlist oficial `PLXOahXK6w5UA`, fornecida em 11/11/2026, está configurada em `src/content/congress-videos.ts`. Opcionalmente, substitua-a por `YOUTUBE_PLAYLIST_ID` pelo comando acima.
-3. O **player oficial da playlist** aparece diretamente abaixo das fotos, com o menu de vídeos do YouTube e um link alternativo para abrir a playlist no YouTube. A área não depende de uma variável de ativação. `YOUTUBE_DISPLAY_MODE` fica em `playlist` por padrão; a chave já salva não muda esse comportamento.
-4. Reinicie o servidor depois de cadastrar o link. A partir daí, a equipe adiciona os vídeos à **mesma playlist no YouTube**. Ao abrir/reabrir o player ou recarregar a página, o YouTube carrega a lista disponível, sem editar o site ou fazer novo deploy. Uma lista que já esteja aberta pode precisar ser recarregada; não se promete atualização instantânea durante a reprodução, e vale o tempo de processamento/cache do YouTube.
+3. Os vídeos aparecem diretamente abaixo das fotos, cada um com seu **player oficial do YouTube**, título e um link para a playlist completa. O catálogo vem do feed Atom público oficial da mesma playlist. A área não depende de uma variável de ativação. `YOUTUBE_DISPLAY_MODE` fica em `playlist` por padrão; a chave já salva não muda esse comportamento.
+4. Reinicie o servidor depois de trocar o link na configuração local. A equipe continua adicionando vídeos à **mesma playlist no YouTube**, sem editar o site ou fazer novo deploy. O feed tem cache de 60 segundos e a página visível consulta o catálogo a cada minuto. A atualização depende também do processamento/cache do YouTube. O feed oficial inclui até 15 vídeos recentes; para playlists maiores, o link abre a lista completa, e o modo opcional Data API permite um catálogo mais amplo.
 5. A playlist e os vídeos precisam permitir visualização e incorporação.
 
 Somente se for solicitado no futuro o modo de cards individuais: defina `YOUTUBE_DISPLAY_MODE=cards`, habilite **YouTube Data API v3** e configure uma chave adequada ao servidor em `YOUTUBE_API_KEY`. Nesse modo, a integração consulta `playlistItems.list` e `videos.list`, preserva a ordem e descarta vídeos privados, removidos, não processados ou sem incorporação. A restrição por referenciador HTTP da chave recebida precisaria ser revista apenas para esse uso opcional.
 
-O iframe da playlist usa carregamento adiado (`loading="lazy"`) e não inicia a reprodução automaticamente. O conteúdo é reproduzido em `youtube-nocookie.com`; nenhum vídeo é baixado pelo site. No modo opcional de cards, o modal só abre após um clique; uma miniatura ausente recebe alternativa visual e falhas de quota/rede mostram indisponibilidade.
+Os iframes usam carregamento adiado (`loading="lazy"`) e não iniciam a reprodução automaticamente. O conteúdo é reproduzido em `youtube-nocookie.com`; nenhum vídeo é baixado pelo site. No modo opcional de cards, o modal só abre após um clique; uma miniatura ausente recebe alternativa visual e falhas de quota/rede mostram indisponibilidade.
 
 ## Atualização e limites reais
 
-- Metadados de fotos e do modo opcional de cards usam `unstable_cache`, compatível com a configuração instalada sem `cacheComponents`, com revalidação de **600 segundos**. O player de playlist padrão consulta diretamente o YouTube quando é aberto; não utiliza o cache de vídeos da Data API.
+- Metadados de fotos e do modo opcional de cards usam `unstable_cache`, compatível com a configuração instalada sem `cacheComponents`, com revalidação de **600 segundos**. O catálogo público padrão usa o feed Atom oficial do YouTube com cache de **60 segundos**, sem chave da Data API.
 - O cache é revalidado **por consulta após o prazo**; não há tarefa executando a cada dez minutos. A primeira resposta após vencer o prazo pode conter o catálogo anterior durante a revalidação.
-- Uma página aberta e visível consulta as fotos a cada 30 segundos e ao voltar para a aba. Os vídeos, quando ativados, continuam com intervalo de dez minutos. A galeria preserva as fotos de páginas já carregadas ao incorporar novas imagens; as versões ampliadas continuam sob demanda.
-- Cada página de fotos apresenta até 36 itens, cada página de vídeos 6; o botão “Carregar mais” busca os seguintes.
+- Uma página aberta e visível consulta as fotos a cada 30 segundos e ao voltar para a aba; os vídeos são consultados a cada minuto. A galeria preserva as fotos de páginas já carregadas ao incorporar novas imagens; o catálogo público de vídeos é substituído pelo feed atualizado para refletir também remoções. As versões ampliadas das fotos continuam sob demanda.
+- Cada página de fotos apresenta até 36 itens. O modo opcional de cards apresenta seis vídeos por página; o botão “Carregar mais” busca os seguintes. O modo público padrão apresenta os até 15 vídeos recentes do feed, sem paginação.
 - Listagens Google usam `nextPageToken`. Por segurança, o catálogo é limitado a 30 pastas imediatas, 2.000 fotos e 500 itens de playlist; cada listagem tem limite de páginas. A API informa `limited` quando um teto de catálogo é alcançado. Para mais volume, evolua para storage persistente/sincronização em lotes.
 - Consultas de catálogo têm prazo total de 25 segundos; a leitura do Drive tem orçamento de 45 chamadas por atualização. Uma falha não substitui deliberadamente o cache válido por um catálogo vazio.
 - Os metadados são cacheados pelo mecanismo de dados do Next e seu adaptador de hospedagem. O comportamento de retenção em falhas precisa ser confirmado na implantação real; não há banco próprio nem índice durável adicional.

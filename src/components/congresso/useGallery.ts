@@ -5,7 +5,7 @@ import type { GalleryStatus } from "@/types/congresso";
 
 type GalleryData = { status: GalleryStatus; items: { id: string }[]; nextPage?: number };
 
-export function useGallery<T extends GalleryData>(url: string, refreshInterval = 600_000) {
+export function useGallery<T extends GalleryData>(url: string, refreshInterval = 600_000, preserveLoadedPages = true) {
   const [result, setResult] = useState<{ url: string; data?: T; failed: boolean }>();
   const [requestVersion, setRequestVersion] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -29,7 +29,7 @@ export function useGallery<T extends GalleryData>(url: string, refreshInterval =
           const prior = previous?.url === url ? previous.data : undefined;
           // Preserve already loaded pages while new photos are added at the front.
           const overlaps = prior?.items.some((item) => next.items.some((fresh) => fresh.id === item.id));
-          const data = prior ? {
+          const data = prior && preserveLoadedPages ? {
             ...next, nextPage: overlaps ? prior.nextPage : next.nextPage,
             items: [...new Map([...next.items, ...prior.items].map((item) => [item.id, item])).values()]
           } as T : next;
@@ -54,7 +54,7 @@ export function useGallery<T extends GalleryData>(url: string, refreshInterval =
       window.removeEventListener("storage", onStorage);
       document.removeEventListener("visibilitychange", refreshVisible);
     };
-  }, [url, requestVersion, refreshInterval]);
+  }, [url, requestVersion, refreshInterval, preserveLoadedPages]);
 
   const retry = useCallback(() => setRequestVersion((value) => value + 1), []);
 

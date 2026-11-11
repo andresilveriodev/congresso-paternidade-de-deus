@@ -28,6 +28,35 @@ function safeThumbnail(url?: string) {
   } catch { return undefined; }
 }
 
+function decodeXml(value: string) {
+  const entities: Record<string, string> = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'" };
+  return value.replace(/&(#x[\da-f]+|#\d+|amp|lt|gt|quot|apos);/gi, (entity, code: string) => {
+    if (!code.startsWith("#")) return entities[code.toLowerCase()] ?? entity;
+    const point = code.toLowerCase().startsWith("#x") ? parseInt(code.slice(2), 16) : parseInt(code.slice(1), 10);
+    return point > 0 && point <= 0x10ffff ? String.fromCodePoint(point) : "";
+  });
+}
+
+// The official public Atom feed provides the playlist's recent videos without a Data API key.
+export async function getPublicVideoCatalog(playlistId: string) {
+  const url = new URL("https://www.youtube.com/feeds/videos.xml");
+  url.searchParams.set("playlist_id", playlistId);
+  const response = await fetch(url, { next: { revalidate: 60 }, signal: AbortSignal.timeout(12000), redirect: "error" });
+  if (!response.ok) throw new GalleryError("UPSTREAM");
+  const xml = await response.text();
+  if (!/<feed\b/.test(xml)) throw new GalleryError("UPSTREAM");
+  const items: CongressVideo[] = [];
+  for (const entry of xml.matchAll(/<entry\b[^>]*>([\s\S]*?)<\/entry>/g)) {
+    const id = entry[1].match(/<yt:videoId>([^<]+)<\/yt:videoId>/)?.[1];
+    const title = entry[1].match(/<title(?:\s[^>]*)?>([\s\S]*?)<\/title>/)?.[1];
+    if (!id || !isVideoId(id) || !title || items.some((item) => item.id === id)) continue;
+    items.push({ id, title: decodeXml(title).trim().slice(0, 200), position: items.length,
+      thumbnailUrl: `https://i.ytimg.com/vi/${id}/hqdefault.jpg` });
+  }
+  // YouTube's public feed is limited to the most recent 15 entries; the full playlist remains linked.
+  return { items, limited: items.length >= 15 };
+}
+
 const readPlaylist = unstable_cache(async (_sourceKey: string) => {
   const config = getYouTubeConfig();
   if (!config?.apiKey) throw new GalleryError("CONFIGURATION");
