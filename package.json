@@ -10,6 +10,7 @@
     "test:galeria": "node --experimental-strip-types --test tests/congresso.test.mjs tests/gallery-admin.test.mjs",
     "galeria:configurar": "node scripts/configurar-galeria.mjs",
     "galeria:verificar": "node scripts/configurar-galeria.mjs --check",
+    "galeria:importar": "node scripts/importar-fotos-congresso.mjs",
     "galeria:painel": "node scripts/preparar-painel-galeria.mjs"
   },
   "overrides": {

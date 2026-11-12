@@ -27,7 +27,7 @@
 .gallery-content { display: grid; gap: 44px; min-width: 0; }
 .gallery-group { min-width: 0; scroll-margin-top: 30px; }
 .gallery-group-heading { align-items: center; display: flex; gap: 16px; justify-content: space-between; margin-bottom: 20px; }
-.gallery-group-heading h3 { color: var(--navy); font-size: 20px; font-weight: 500; margin: 0; }
+.gallery-group-heading :is(h2, h3) { color: var(--navy); font-size: 20px; font-weight: 500; margin: 0; }
 .gallery-scroll-controls { display: flex; flex-shrink: 0; gap: 8px; }
 .gallery-scroll-controls button { align-items: center; background: transparent; border: 1px solid #c6bcae; border-radius: 50%; color: var(--navy); display: flex; font-size: 22px; height: 44px; justify-content: center; padding: 0; transition: background 180ms ease, color 180ms ease; width: 44px; }
 .gallery-scroll-controls button:hover:not(:disabled) { background: var(--navy); border-color: var(--navy); color: white; }
@@ -90,6 +90,25 @@
 .gallery-photo-caption > span { font-size: 22px; }
 .gallery-more { align-items: center; background: transparent; border: 1px solid #c6bcae; border-radius: var(--radius); color: var(--navy); display: flex; gap: 24px; justify-content: center; margin: 28px auto 0; min-height: 46px; padding: 10px 24px; }
 .gallery-more:disabled { cursor: wait; opacity: .65; }
+.gallery-all-link { background: var(--navy); border-color: var(--navy); color: white; width: fit-content; }
+.gallery-all-link:hover { background: #123b51; }
+.gallery-all-link:focus-visible, .gallery-back-link:focus-visible { outline: 3px solid #8d6d37; outline-offset: 4px; }
+.photo-gallery-page { margin: 0 auto; max-width: 1180px; min-height: 60vh; padding: 32px 24px 80px; }
+.gallery-back-link { color: var(--navy); display: inline-block; font-size: 14px; margin-bottom: 32px; text-underline-offset: 4px; }
+.photo-gallery-intro { margin-bottom: 40px; }
+.photo-gallery-intro h1 { color: var(--navy); font-size: clamp(32px, 5vw, 48px); font-weight: 600; line-height: 1.1; margin: 0; }
+.photo-gallery-intro h1 span { color: #7b8085; }
+.photo-gallery-intro p { color: #586168; font-size: 16px; line-height: 1.6; margin: 20px 0 0; }
+.gallery-photo-count { color: #586168; font-size: 14px; margin: 0; }
+.gallery-calendar.schedule-tabs { gap: 4px; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0 0 28px; max-width: none; }
+.gallery-calendar.schedule-tabs button { border-bottom: 1px solid #c6bcae; min-height: 92px; }
+.gallery-calendar.schedule-tabs span, .gallery-calendar.schedule-tabs small { font-size: 13px; }
+.gallery-calendar.schedule-tabs strong { font-size: 32px; }
+.gallery-calendar.schedule-tabs button[aria-pressed="true"] { color: var(--navy); }
+.gallery-calendar.schedule-tabs button:focus-visible, .gallery-full button:focus-visible { outline: 3px solid #8d6d37; outline-offset: 3px; }
+.gallery-photo-grid { display: grid; gap: 24px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.gallery-photo-grid .gallery-photo { width: 100%; }
+.gallery-photo-grid:focus-visible { outline: 3px solid #8d6d37; outline-offset: 4px; }
 .gallery-group > .gallery-state:last-child:not(:first-child) { margin-top: 16px; }
 .gallery-video-thumbnail { align-items: center; aspect-ratio: 16 / 9; background: #e8e2d8; border-radius: var(--radius); display: flex; justify-content: center; overflow: hidden; position: relative; }
 .gallery-video-thumbnail > img { height: 100%; object-fit: cover; transition: transform 350ms var(--ease); width: 100%; }
@@ -137,12 +156,22 @@
 
 @keyframes gallery-pulse { to { opacity: .35; } }
 @media (max-width: 1024px) {
+  .gallery-photo-grid { gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .congress-gallery.figma-section { margin: 0 24px; padding: 52px 0 64px; }
   .gallery-video-grid { gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .gallery-photo-track { gap: 16px; }
   .gallery-photo-track > .gallery-photo { flex-basis: 72%; }
 }
 @media (max-width: 600px) {
+  .photo-gallery-page { padding: 24px 20px 48px; }
+  .photo-gallery-intro { margin-bottom: 32px; }
+  .gallery-calendar.schedule-tabs { gap: 2px; }
+  .gallery-calendar.schedule-tabs button { min-height: 84px; padding: 8px 2px; }
+  .gallery-calendar.schedule-tabs span, .gallery-calendar.schedule-tabs small { font-size: 11px; }
+  .gallery-calendar.schedule-tabs strong { font-size: 27px; }
+  .gallery-photo-grid { grid-template-columns: 1fr; }
+  .gallery-full .gallery-group-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .gallery-all-link { width: 100%; }
   .congress-gallery.figma-section { margin: 0 20px; padding: 40px 0 48px; }
   .congress-gallery .section-heading { gap: 16px; margin-bottom: 32px; }
   .congress-gallery .section-heading h2 { font-size: 32px; }

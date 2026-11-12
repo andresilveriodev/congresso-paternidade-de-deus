@@ -2,7 +2,19 @@
 
 ## O que já está implementado
 
-A seção `#galeria` fica imediatamente antes de `#conferencistas` na página inicial. Mantém a paleta e os elementos do site e tem textos em português, inglês, espanhol e italiano. As 13 fotos da primeira remessa e as 16 da segunda estão incluídas no projeto, com as novas primeiro. As 29 fotos aparecem sem configurar o Drive, com rolagem horizontal, três fotos por vez no computador e ampliação ao clicar. O player da playlist oficial aparece logo abaixo das fotos.
+A seção `#galeria` fica imediatamente antes de `#conferencistas` na página inicial. Mantém a paleta e os elementos do site e tem textos em português, inglês, espanhol e italiano. As 555 fotos fornecidas estão incluídas no projeto, com as mais recentes primeiro. A página inicial apresenta uma faixa horizontal com ampliação e o botão **Ver todas as fotos**, que leva à galeria completa. Os players dos vídeos aparecem abaixo das fotos.
+
+### Galeria completa por dia — atualização de 12/11/2026
+
+- Rota: `/pt/galeria`, também disponível em `/en/galeria`, `/es/galeria` e `/it/galeria`.
+- Botões de seleção de dia reaproveitam a apresentação da programação, com dia da semana, número e mês; há também a opção **Todos os dias**.
+- **Terça, 10/11:** 29 fotos já existentes, classificadas conforme a indicação do usuário.
+- **Quarta, 11/11:** 489 fotos de `fotos/11 Quarta Feira`.
+- **Quinta, 12/11:** 37 fotos de `fotos/12 quinta feira`.
+- A grade usa três colunas no computador, duas no tablet e uma no celular. Cada consulta traz até 36 fotos e o botão **Carregar mais** permite acessar as seguintes. O contador informa quantas fotos foram carregadas e o total do dia.
+- Ao clicar em uma foto, o visualizador permite ampliar, avançar, voltar e fechar pelo botão ou pela tecla Escape.
+- `npm run galeria:importar` prepara os dois lotes novos em WebP, com miniaturas e imagens ampliadas de até 1920 pixels, sem EXIF/GPS, e gera `src/content/congress-photo-imports.json`. Os originais em `fotos/` são preservados e ignorados pelo Git.
+- O catálogo local conserva as 29 fotos anteriores. As APIs continuam combinando fotos locais, envios pelo painel e a integração opcional do Drive; a paginação informa `total` e `totalAll`.
 
 O envio direto pelo próprio site está implementado em `/admin/galeria`, com senha e armazenamento Blob privado na Vercel. Consulte [PAINEL-FOTOS.md](PAINEL-FOTOS.md) para ativação inicial e uso. O Google Drive descrito abaixo passa a ser uma integração opcional.
 

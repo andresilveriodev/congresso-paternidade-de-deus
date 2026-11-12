@@ -1,4 +1,5 @@
 import type { CongressPhoto } from "@/types/congresso";
+import importedPhotos from "./congress-photo-imports.json";
 
 const descriptions = [
   "Religioso com microfone na tribuna do Congresso Paternidade de Deus.",
@@ -22,6 +23,7 @@ const firstBatch: CongressPhoto[] = descriptions.map((alt, index) => {
   const path = `/images/congresso/primeira-remessa/foto-${number}`;
   return {
     id: `congresso-primeira-remessa-${number}`,
+    day: "10/11/2026",
     title: `Congresso Paternidade de Deus — ${number}`,
     alt,
     thumbnailUrl: `${path}-miniatura.webp`,
@@ -53,6 +55,7 @@ const secondBatch: CongressPhoto[] = secondBatchDescriptions.map((alt, index) =>
   const path = `/images/congresso/segunda-remessa/foto-${number}`;
   return {
     id: `congresso-segunda-remessa-${number}`,
+    day: "10/11/2026",
     title: `Congresso Paternidade de Deus — ${String(index + firstBatch.length + 1).padStart(2, "0")}`,
     alt,
     thumbnailUrl: `${path}-miniatura.webp`,
@@ -60,4 +63,4 @@ const secondBatch: CongressPhoto[] = secondBatchDescriptions.map((alt, index) =>
   };
 });
 
-export const congressPhotos: CongressPhoto[] = [...secondBatch, ...firstBatch];
+export const congressPhotos: CongressPhoto[] = [...importedPhotos, ...secondBatch, ...firstBatch];

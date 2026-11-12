@@ -21,6 +21,8 @@ export type PhotoGalleryData = {
   status: GalleryStatus;
   items: CongressPhoto[];
   days: string[];
+  total?: number;
+  totalAll?: number;
   nextPage?: number;
   limited?: boolean;
   partial?: boolean;

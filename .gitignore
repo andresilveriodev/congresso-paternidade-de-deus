@@ -17,3 +17,6 @@ design-system.html
 netlify-deploy/
 output/
 .playwright-cli/
+
+# Originais locais; publicar somente as imagens otimizadas e o catalogo.
+/fotos/

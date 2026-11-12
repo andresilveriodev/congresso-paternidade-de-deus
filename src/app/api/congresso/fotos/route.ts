@@ -15,9 +15,12 @@ export async function GET(request: Request) {
   if (day && day.length > 120) return Response.json({ error: "Dia inválido." }, { status: 400 });
   try {
     const catalog = await getPhotoCatalog();
+    const items = day ? catalog.items.filter((item) => item.day === day) : catalog.items;
     const data: PhotoGalleryData = catalog ? {
       status: "ready",
-      ...pageItems(day ? catalog.items.filter((item) => item.day === day) : catalog.items, page, PHOTO_PAGE_SIZE),
+      ...pageItems(items, page, PHOTO_PAGE_SIZE),
+      total: items.length,
+      totalAll: catalog.items.length,
       days: [...new Set(catalog.items.flatMap((item) => item.day ? [item.day] : []))].sort((a, b) => a.localeCompare(b, "pt-BR", { numeric: true })),
       limited: catalog.limited,
       partial: catalog.partial

@@ -12,6 +12,6 @@ export function GaleriaCongressoSection({ locale }: { locale: Locale }) {
       <SectionMark />
       <div><SplitTitle first={copy.title} second={copy.subtitle} /><p className="gallery-intro">{copy.intro}</p></div>
     </div>
-    <div className="gallery-content"><GaleriaFotos copy={copy} /><GaleriaVideos copy={copy} /></div>
+    <div className="gallery-content"><GaleriaFotos allPhotosHref={`/${locale}/galeria`} copy={copy} locale={locale} /><GaleriaVideos copy={copy} /></div>
   </section>;
 }
