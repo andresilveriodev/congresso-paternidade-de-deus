@@ -81,8 +81,8 @@ export const schedule = [
       ["16h", "Debate"],
       ["17h", "Lanche"],
       ["17h15", "Comunicações científicas"],
-      ["19h", "Missa no Santuário Basílica — presidida pelo Dom Danival Milagres Coelho"],
-      ["20h", "Apresentação cultural na praça do Santuário"]
+      ["19h", "Missa no Santuário Basílica — presidida pelo Dom Dimas Lara Barbosa - Arcebispo de Campo Grande"],
+      ["20h", "Apresentação cultural no Cineteatro Pe. Jesus Flores - Com Show 3 Cantos"]
     ]
   },
   {

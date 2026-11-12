@@ -306,8 +306,8 @@ const baseHomeCopy = {
           ["4:00 PM", "Discussion"],
           ["5:00 PM", "Refreshments"],
           ["5:15 PM", "Academic presentations"],
-          ["7:00 PM", "Mass at the Basilica Sanctuary — presided over by Bishop Danival Milagres Coelho"],
-          ["8:00 PM", "Cultural performance at the Sanctuary square"]
+          ["7:00 PM", "Mass at the Basilica Sanctuary — presided over by Dom Dimas Lara Barbosa - Archbishop of Campo Grande"],
+          ["8:00 PM", "Cultural performance at Cineteatro Fr. Jesus Flores - Featuring the 3 Cantos show"]
         ]
       },
       {
@@ -450,8 +450,8 @@ const baseHomeCopy = {
           ["16:00", "Dibattito"],
           ["17:00", "Pausa caffè"],
           ["17:15", "Presentazioni scientifiche"],
-          ["19:00", "Messa presso la Basilica Santuario — presieduta da Dom Danival Milagres Coelho"],
-          ["20:00", "Presentazione culturale nella piazza del Santuario"]
+          ["19:00", "Messa presso la Basilica Santuario — presieduta da Dom Dimas Lara Barbosa - Arcivescovo di Campo Grande"],
+          ["20:00", "Presentazione culturale al Cineteatro Padre Jesus Flores - Con lo spettacolo 3 Cantos"]
         ]
       },
       {
@@ -627,8 +627,8 @@ const spanishSchedule: ScheduleDay[] = [
       ["14:30", "Piedad popular e inculturación de la fe — Dr. Bryan Thatcher"],
       ["15:15", "El Santuario del Divino Padre Eterno como locus theologicus — Mons. João Justino de Medeiros Silva"],
       ["16:00", "Debate"], ["17:00", "Refrigerio"], ["17:15", "Comunicaciones científicas"],
-      ["19:00", "Misa en el Santuario Basílica — presidida por Mons. Danival Milagres Coelho"],
-      ["20:00", "Presentación cultural en la plaza del Santuario"]
+      ["19:00", "Misa en el Santuario Basílica — presidida por Dom Dimas Lara Barbosa - Arzobispo de Campo Grande"],
+      ["20:00", "Presentación cultural en el Cineteatro P. Jesus Flores - Con el espectáculo 3 Cantos"]
     ]
   },
   {
